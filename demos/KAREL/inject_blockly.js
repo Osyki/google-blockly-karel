@@ -1,41 +1,35 @@
+import DarkTheme from "@blockly/theme-dark";
 
-/* TODO: Change toolbox XML ID if necessary. Can export toolbox XML from Workspace Factory. */
 var toolbox = document.getElementById("toolbox");
-
 var options = {
-    toolbox : toolbox,
-    collapse : true,
-    comments : true,
-    disable : true,
-    maxBlocks : Infinity,
-    trashcan : true,
-    horizontalLayout : false,
-    toolboxPosition : 'start',
-    css : true,
-    media : 'https://blockly-demo.appspot.com/static/media/',
-    rtl : false,
-    scrollbars : true,
-    sounds : true,
-    oneBasedIndex : true,
-    grid : {
-        spacing : 20,
-        length : 1,
-        colour : '#888',
-        snap : false
+    toolbox: toolbox,
+    comments: true,
+    collapse: true,
+    disable: true,
+    horizontalLayout: false,
+    maxBlocks: Infinity,
+    media: '../../media/',
+    oneBasedIndex: true,
+    readOnly: false,
+    rtl: false,
+    move: {
+        scrollbars: true,
+        drag: true,
+        wheel: false,
     },
-    zoom : {
-        controls : true,
-        wheel : true,
-        startScale : 1,
-        maxScale : 3,
-        minScale : 0.3,
-        scaleSpeed : 1.2
-    }
+    toolboxPosition: 'start',
+    renderer: 'zelos',
+    theme: DarkTheme,
+    zoom:
+        {
+            controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 4,
+            minScale: 0.25,
+            scaleSpeed: 1.1
+        }
 };
-
-/* Inject your workspace */
-
-
 
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
