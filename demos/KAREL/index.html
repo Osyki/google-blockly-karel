@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Blockly Demo: Resizable Blockly (Part 2)</title>
+    <script src="../../blockly_compressed.js"></script>
+    <script src="../../blocks_compressed.js"></script>
+    <script src="../../msg/js/en.js"></script>
+    <script src="generators/KAREL/prog_name.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--<table>-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--            <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;-->
+<!--                <a href="../index.html">Demos</a> &gt; Resizable Blockly (Part 2)</h1>-->
+
+<!--            <p>-->
+<!--                Once an <a href="index.html">area is defined</a>, Blockly can be-->
+<!--                injected and positioned over the area.-->
+<!--                A resize handler keeps it in position as the page changes.-->
+<!--            </p>-->
+
+<!--            <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure/web/resizable">injecting resizable Blockly</a>&hellip;</p>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td id="blocklyArea">-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<table id="table">
+<tr>
+    <td>
+        <h1>
+            <span id="title">KAREL</span>
+            <span id = "version">Beta v0.1</span>
+        </h1>
+
+        <p>
+            <button onclick="showFilePopUp('saveFilePopUp')" title="Save your work.">Save Files</button>
+            <button onclick="showFilePopUp('loadFilePopUp')" title="Load your work.">Load Files</button>
+            <input type="file" id="fileSaveBtn" onchange="readFiles(this)" style="display:none"
+                   title="Load a blockly save into the program." multiple/>
+            <button onclick="showFilePopUp('renameFilePopUp')" title="Rename File">Rename File</button>
+            <button onclick="showFilePopUp('deleteFilePopUp')" title="Delete File">Delete File</button>
+            <button onclick="showFilePopUp('newFilePopUp')" title="New File">New File</button>
+            <button onclick="downloadCode()">Download Code</button>
+        </p>
+        <div id="fileDisplayName" style="font-size:150%">Current File: PROGRAM.kl</div>
+    </td>
+    <td class="farSide">
+        <br>
+        <select id="languageMenu"></select>
+    </td>
+</tr>
+<tr>
+    <td colspan=2>
+        <table width="100%">
+
+            <tr id="tabRow" >
+                <td id="tab_blocks" class="tabon">...</td>
+                <td id="tab_KAREL" class="taboff">KAREL</td> <!--Added C++ to the tab-->
+                <td id="tab_xml" class="taboff"></td>
+                <td class="tabmin">
+                    <div class="fdropdown">
+                        <button class="filedropdownbutton">Files...</button>
+                        <div id="fileDropDown" class="filedropdown-content">
+                            <a href="javascript:void(0)" id="prog_name.kl_file" onclick="makeFileVisible('prog_name.kl')">prog_name.kl</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="tabmax">
+                    <button id="trashButton" class="notext" title="...">
+                        <img src='../../media/1x1.gif' class="trash icon21" alt="">
+                    </button>
+                    <button id="linkButton" class="notext" title="...">
+                        <img src='../../media/1x1.gif' class="link icon21" alt="">
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <!-- Hao: change percentage occupied by the cells -->
+    <td colspan=1 id="blocklyArea"></td>
+    <td colspan=1 id="codeCell"><textarea id="codeArea" class="content" wrap="off"></textarea></td>
+
+</tr>
+</table>
+
+<div id="blocklyDiv"></div>
+
+<xml xmlns="" id="toolbox" style="display: none">
+    <block type="prog_name"></block>
+</xml>
+
+<script src="blockly.js"></script>
+</body>
+</html>

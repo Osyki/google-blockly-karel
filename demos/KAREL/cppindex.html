@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="google" value="notranslate">
+    <title>Blockly KAREL Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="../../blockly_compressed.js"></script>
+    <script src="../../blocks_compressed.js"></script>
+    <script src="../../c_compressed.js"></script>
+
+    <script src="code.js"></script>
+
+    <script src="js/Logic.js"></script>
+    <script src="js/Include.js"></script>
+    <script src="js/Scopes.js"></script>
+    <script src="js/Variable Management.js"></script>
+
+    <script src="Blocks/FileSaver.js"></script>
+    <script src="Blocks/filereader.js"></script>
+    <script src="Blocks/fileIO.js"></script>
+    <script src="Blocks/Include.js"></script>
+    <script src="Blocks/Include - Files.js"></script>
+    <script src="Blocks/Main Function.js"></script>
+    <script src="Blocks/Chapter 1 - Cout, Cin.js"></script>
+    <script src="Blocks/Chapter 1 - Strings.js"></script>
+    <script src="Blocks/Chapter 1 - Variables.js"></script>
+    <script src="Blocks/Chapter 2 - Variables - Assignments.js"></script>
+    <script src="Blocks/Chapter 3 - Branches.js"></script>
+    <script src="Blocks/Chapter 3 - CCType.js"></script>
+    <script src="Blocks/Chapter 3 - Switch Cases.js"></script>
+    <script src="Blocks/Chapter 4 - Loops.js"></script>
+    <script src="Blocks/Chapter 5 - Functions.js"></script>
+    <script src="Blocks/Chapter 6 - Arrays.js"></script>
+    <script src="Blocks/Chapter 6 - Arrays (2D).js"></script>
+    <script src="Blocks/Chapter 6 - Vectors.js"></script>
+    <script src="Blocks/Chapter 6 - Pointers.js"></script>
+    <script src="Blocks/Chapter 7 - Structs.js"></script>
+    <script src="Blocks/Chapter 7 - Classes.js"></script>
+    <script src="Blocks/Chapter 10 - Inheritance.js"></script>
+
+    <script src="Blocks/prog_name.js"></script>
+
+    <!-- Include block type inputs -->
+    <script src="Blocks/Blocks - Type.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jcubic/jquery.terminal@devel/js/jquery.terminal.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.20.2/css/jquery.terminal.min.css">
+    <script src="js/Terminal.js"></script>
+    <script src="js/compilerOptions.js"></script>
+</head>
+
+<body>
+<table width="100%" height="100%">
+    <tr>
+        <td>
+            <h1>
+                <span id="title">KAREL</span>
+                <span id = "version">Beta v0.1</span>
+            </h1>
+            <p align="left">
+                <br>
+                <button onclick="downloadCode()">Download KAREL Code</button>
+                <!-- button onclick="updateLog(this)">Download C++</button -->
+            </p>
+
+            <p align="left">
+                <button onclick="showFilePopUp('saveFilePopUp')" title="Save your work.">Save Files</button>
+                <button onclick="showFilePopUp('loadFilePopUp')" title="Load your work.">Load Files</button>
+                <input type="file" id="fileSaveBtn" onchange="readFiles(this)" style="display:none"
+                       title="Load a blockly save into the program." multiple/>
+                <button onclick="showFilePopUp('renameFilePopUp')" title="Rename File">Rename File</button>
+                <button onclick="showFilePopUp('deleteFilePopUp')" title="Delete File">Delete File</button>
+                <button onclick="showFilePopUp('newFilePopUp')" title="New File">New File</button>
+            </p>
+            <div id="fileDisplayName" style="font-size:150%">Current File: prog_name.kl</div>
+        </td>
+        <td class="farSide">
+            <br>
+            <select id="languageMenu"></select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan=2>
+            <table width="100%">
+
+                <tr id="tabRow" height="1em">
+                    <td id="tab_blocks" class="tabon">...</td>
+                    <td id="tab_c" class="taboff">KAREL</td> <!--Added C++ to the tab-->
+                    <td class="tabmin">&nbsp;</td>
+                    <td id="tab_xml" class="taboff"></td>
+                    <td class="tabmin">&nbsp;</td>
+                    <td id="tab_term" class="taboff">Terminal</td>
+                    <td class="tabmin">&nbsp;</td>
+                    <td class="tabmin" align="left">
+                        <div class="fdropdown">
+                            <button class="filedropdownbutton">Files...</button>
+                            <div id="fileDropDown" class="filedropdown-content">
+                                <a href="javascript:void(0)" id="prog_name.kl_file" onclick="makeFileVisible('prog_name.kl')">prog_name.kl</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tabmax">
+                        <button id="trashButton" class="notext" title="...">
+                            <img src='../../media/1x1.gif' class="trash icon21" alt="">
+                        </button>
+                        <button id="linkButton" class="notext" title="...">
+                            <img src='../../media/1x1.gif' class="link icon21" alt="">
+                        </button>
+                        <button id="runButton" class="notext primary" title="...">
+                            <img src='../../media/1x1.gif' class="run icon21" alt="">
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <!-- Hao: change percentage occupied by the cells -->
+        <td height="99%" width="80%" colspan=1 id="content_area"></td>
+        <td height="99%" width="20%" colspan=1 id="code_area"></td>
+
+    </tr>
+</table>
+<div id="Main.cpp" class="content"></div>
+
+<pre id="content_c" class="content prettyprint lang-c"></pre>
+<!-- Hao: use c_text element to store c code on the tab_blocks -->
+<pre id="c_text" class="content prettyprint lang-c"></pre>
+<textarea id="content_xml" class="content" wrap="off"></textarea>
+<div id="content_term" class="content">
+    <button onclick="runCode()" float="left">Run ▶</button>
+    <button onclick="stopCodeRun()" float="left">Stop ◼</button>
+    <button id="compOptBtn">Options</button>
+    <dialog open id="compOptDiv">
+        <form class="form" action="#" id="compOptForm">
+            <div id="compOptHead">Compile Options</div>
+            <hr />
+            <p id="fileCompileLabel"><b>Compile List</b></p>
+            <div id="fileCheckboxes"></div>
+            <br />
+            <p id="AdvancedOptions"><b>Advanced Options</b><br />leave these alone unless you know what they are</p>
+            <p id="compilerOptmLevelLabel"><u>Compiler optimization level</u></p>
+            <div id="compilerOptimRadios"></div>
+            <p id="compilerVersionLabel"><u>C++ Version</u></p>
+            <div id="compilerVersionRadios"></div>
+            <p id="miscCompilerOptsLabel"><u>Misc Options</u></p>
+            <div id="miscCompilerOptsCheckboxes"></div>
+            <br />
+            <button id="saveBtn">Save</button>
+            <button id="cancelBtn">Cancel</button>
+        </form>
+    </dialog>
+    <div id="terminal" class="terminal"></div>
+</div>
+<div id="newFilePopUp" class="modal">
+    <div class="modal-header">
+        <div id="close-btn" class="close-btn" onclick="hideFilePopUp('newFilePopUp')">&times;</div>
+    </div>
+    <div class="modal-content">
+        <p><strong>Create A New File...</strong></p>
+        <p>Please enter a valid file name.</p>
+        <input type="text" id="fileTypeName" name="FileTypeName" />
+
+        <div style="display:inline-block">
+            <input type="radio" id="fileTypeH" name="fileTypeButton" value=".h">
+            <label for="fileTypeh">Header(.h)</label><br>
+            <input type="radio" name="fileTypeButton" value=".cpp">
+            <label for="fileTypec">Class(.cpp)</label><br>
+        </div>
+        <div style="float:right">
+            <input type="button" style="padding:3px" onclick="newFileName()" value="Create File" />
+            <input type="button" style="padding:3px" onclick="hideFilePopUp('newFilePopUp')" value="Cancel" />
+        </div>
+    </div>
+</div>
+<div id="saveFilePopUp" class="modal">
+    <div class="modal-header">
+        <div id="close-btn" class="close-btn" onclick="hideFilePopUp('saveFilePopUp')">&times;</div>
+    </div>
+    <div class="modal-content">
+        <p><strong>Save All Files...</strong></p>
+        <p>(Warning!!! Certain browsers will not save over existing files in local user directory. Please ensure file names have saved correctly.)</p>
+        <div>
+            <input type="button" id="yesSaveFileBtn" style="padding:3px" onclick="saveFileCheck();" value="Save Files" />
+            <input type="button" id="noSaveFileBtn" style="padding:3px" onclick="hideFilePopUp('saveFilePopUp')" value="Cancel" />
+        </div>
+    </div>
+</div>
+<div id="loadFilePopUp" class="modal">
+    <div class="modal-header">
+        <div id="close-btn" class="close-btn" onclick="hideFilePopUp('loadFilePopUp')">&times;</div>
+    </div>
+    <div class="modal-content">
+        <p><strong>Load File(s)...</strong></p>
+        <p>(Warning!!! Creating a new project will remove all current files. All files which have not been saved will be lost.)</p>
+        <p>(Warning!!! Merging files with duplicate names will replace existing files. Any replaced file that has not been saved will be lost.)</p>
+        <div>
+            <input type="button" id="yesLoadFileBtn" style="padding:3px" onclick="yesNoCancelLoadBtn = 'Yes'; document.getElementById('fileSaveBtn').click(); hideFilePopUp('loadFilePopUp');" value="New Project" />
+            <input type="button" id="noLoadFileBtn" style="padding:3px" onclick="yesNoCancelLoadBtn = 'No'; document.getElementById('fileSaveBtn').click(); hideFilePopUp('loadFilePopUp');" value="Merge Files" />
+            <input type="button" id="cancelLoadFileBtn" style="padding:3px" onclick="yesNoCancelLoadBtn = 'Cancel'; hideFilePopUp('loadFilePopUp');" value="Cancel" />
+        </div>
+    </div>
+</div>
+<div id="renameFilePopUp" class="modal">
+    <div class="modal-header">
+        <div id="close-btn" class="close-btn" onclick="hideFilePopUp('renameFilePopUp')">&times;</div>
+    </div>
+    <div class="modal-content">
+        <p><strong>Rename A File...</strong></p>
+        <p>Please choose a file to rename and enter a valid new name.</p>
+        <div>
+            <div style="display:inline-block">
+                <div>
+                    <form id="originCopyFileDD">
+                        <label for="originCopyFileDD">File to rename:</label>
+                        <select id="originCopyFileDD1" name="originCopyFileDD">
+                        </select>
+                    </form>
+                </div>
+                <div>
+                    <p>Please enter a valid file name:</p>
+                    <input type="text" id="renameFileName" name="renameFileName" />
+
+                    <div style="display:inline-block">
+                        <input type="radio" id="renameFileTypeH" name="renameFileTypeButton" value=".h">
+                        <label for="renameFileTypeH">Header(.h)</label><br>
+                        <input type="radio" name="renameFileTypeButton" value=".cpp">
+                        <label for="renameFileTypeC">Class(.cpp)</label><br>
+                    </div>
+                </div>
+            </div>
+            <div style="float:right">
+                <input type="button" style="padding:3px" onclick="renameFileChecker()" value="Rename File" />
+                <input type="button" style="padding:3px" onclick="hideFilePopUp('renameFilePopUp')" value="Cancel" />
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div id="deleteFilePopUp" class="modal">
+    <div class="modal-header">
+        <div id="close-btn" class="close-btn" onclick="hideFilePopUp('deleteFilePopUp')">&times;</div>
+    </div>
+    <div class="modal-content">
+        <p><strong>Delete A File...</strong></p>
+        <p>Please choose a file to remove.</p>
+        <p>(Warning!! Deleted files can not be recovered.)</p>
+        <div>
+            <div style="display:inline-block">
+                <div>
+                    <form id="originDeleteFileDD">
+                        <label for="originDeleteFileDD">File to delete:</label>
+                        <select id="originDeleteFileDD1" name="originDeleteFileDD">
+                        </select>
+                    </form>
+                </div>
+                <input type="checkbox" id="deleteAllFilesCB" name="deleteAllFilesCB" />
+                <label for="deleteAllFilesCB">Delete All Files</label>
+            </div>
+            <div style="float:right">
+                <input type="button" style="padding:3px" onclick="deleteFile()" value="Delete File(s)" />
+                <input type="button" style="padding:3px" onclick="hideFilePopUp('deleteFilePopUp')" value="Cancel" />
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- Hao: re-categorize the blocks 9/8/2020 -->
+<xml xmlns="" id="toolbox" style="display: none">
+
+
+
+    <category name="KAREL" colour="#134796">
+
+        <label text="Begin program" web-class="labelClass"></label>
+        <block type="prog_name"></block>
+
+
+    </category>
+
+</xml> <!-- toolbox -->
+<!-- <textarea id="content_xml" class="content" wrap="off"></textarea> -->
+</body>
+
+
+</html>
+
+<!-- Label Color Categories -->
+<style>
+    .labelExamples > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #4DAF63;
+    }
+
+    .labelVariable > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #A55B80;
+    }
+
+    .labelCout > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #A57A5B;
+    }
+
+    .labelCin > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #A5995B;
+    }
+
+    .labelString > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #5BA58C;
+    }
+
+    .labelMath > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #5B67A5;
+    }
+
+    .labelLogic > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #5B80A5;
+    }
+
+    .labelCCType > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #5BA59F;
+    }
+
+    .labelSwitch > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #A5A55B;
+    }
+
+    .labelLoops > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #5BA56D;
+    }
+
+    .labelFunction > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #80A55B;
+    }
+
+    .labelArray > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #5BA5A5;
+    }
+
+    .labelVector > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #5B93A5;
+    }
+
+    .labelPointer > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #5B93A5;
+    }
+
+    .labelClass > .blocklyFlyoutLabelText {
+        font-weight: bold;
+        fill: #A5925B
+    }
+
+</style>
