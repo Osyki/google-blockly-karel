@@ -1,5 +1,3 @@
-import DarkTheme from "@blockly/theme-dark";
-
 var toolbox = document.getElementById("toolbox");
 var options = {
     toolbox: toolbox,
@@ -19,7 +17,6 @@ var options = {
     },
     toolboxPosition: 'start',
     renderer: 'zelos',
-    theme: DarkTheme,
     zoom:
         {
             controls: true,

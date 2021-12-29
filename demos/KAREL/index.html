@@ -5,7 +5,6 @@
     <title>Blockly KAREL Programming</title>
 
     <script src="code.js"></script>
-    <script src="../../tests/themes/test_themes.js"></script>
     <script src="../../blockly_compressed.js"></script>
     <script src="../../blocks_compressed.js"></script>
     <script src="../../msg/js/en.js"></script>
@@ -32,7 +31,6 @@
             <button onclick="showFilePopUp('newFilePopUp')" title="New File">New File</button>
             <button onclick="downloadCode()">Download Code</button>
         </p>
-        <div id="fileDisplayName" style="font-size:150%">Current File: PROGRAM.kl</div>
     </td>
     <td class="farSide">
         <br>
@@ -40,14 +38,10 @@
     </td>
 </tr>
 <tr>
-    <td colspan=2>
-        <table width="100%">
-
-            <tr id="tabRow" >
-                <td id="tab_blocks" class="tabon">...</td>
-                <td id="tab_KAREL" class="taboff">KAREL</td> <!--Added C++ to the tab-->
-                <td id="tab_xml" class="taboff"></td>
-                <td class="tabmin">
+    <td colspan=1>
+        <table>
+            <tr id="currentFile" >
+                <td class="tabfile">
                     <div class="fdropdown">
                         <button class="filedropdownbutton">Files...</button>
                         <div id="fileDropDown" class="filedropdown-content">
@@ -55,32 +49,35 @@
                         </div>
                     </div>
                 </td>
-                <td class="tabmax">
-                    <button id="trashButton" class="notext" title="...">
-                        <img src='../../media/1x1.gif' class="trash icon21" alt="">
-                    </button>
-                    <button id="linkButton" class="notext" title="...">
-                        <img src='../../media/1x1.gif' class="link icon21" alt="">
-                    </button>
-                </td>
+
+                <td id="tab_KAREL" class="tabon">KAREL</td>
+                <td id="tab_xml" class="taboff"></td>
+
             </tr>
         </table>
     </td>
 </tr>
 <tr>
-    <!-- Hao: change percentage occupied by the cells -->
     <td colspan=1 id="blocklyArea"></td>
-    <td colspan=1 id="codeCell"><textarea id="codeArea" class="content" wrap="off"></textarea></td>
-
+    <td colspan=1 id="codeCell">
+        <textarea id="codeArea" class="content" wrap="off">
+            Code prints here</textarea>
+        <pre id="content_karel" class="content prettyprint lang-c"></pre>
+        <pre id="karel_text" class="content prettyprint lang-c"></pre>
+    </td>
 </tr>
 </table>
 
 <div id="blocklyDiv"></div>
 
 <xml xmlns="" id="toolbox" style="display: none">
-    <block type="prog_name"></block>
+    <category name="New" colour="#134796">
+        <label text="Begin program" web-class="labelClass"></label>
+        <block type="prog_name"></block>
+    </category>
 </xml>
 
 <script src="inject_blockly.js"></script>
+
 </body>
 </html>

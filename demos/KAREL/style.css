@@ -6,7 +6,7 @@ html, body {
     margin: 0;
 }
 body {
-    background-color: #fff;
+    background-color: #ddd;
     font-family: sans-serif;
     overflow: hidden;
 }
@@ -29,6 +29,39 @@ table {
     height: 99%;
     width: 97%;
 }
+
 .tabmax, .farSide {
     text-align: right;
+}
+.tabon {
+    width: 20%;
+    color: white;
+    border-bottom-color: black !important;
+    background-color: #3366cc;
+    padding: 5px 19px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.taboff {
+    width: 70%;
+    border-bottom-color: #ddd !important;
+    background-color: #bbb;
+    padding: 5px 19px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.taboff:hover {
+    background-color: #eee;
+}
+
+.tabfile {
+    text-align: center;
+    width: 10%;
+    border-bottom-color: #ddd !important;
+    background-color: #43a252;
+    padding: 5px 19px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
 }
