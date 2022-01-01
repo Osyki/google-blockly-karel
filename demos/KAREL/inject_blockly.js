@@ -64,8 +64,16 @@ Code.LANGUAGE_RTL = ['ar', 'fa', 'he', 'lki'];
  */
 Code.workspace = null;
 
+/**
+ * Get blockly the toolbox
+ * @type {HTMLElement}
+ */
 Code.toolbox = document.getElementById("toolbox");
-var options = {
+
+/**
+ * Blockly Default Toolbox options
+ */
+Code.toolboxoptions = {
     toolbox: toolbox,
     comments: true,
     collapse: true,
@@ -93,26 +101,82 @@ var options = {
         }
 };
 
-var blocklyArea = document.getElementById('blocklyArea');
-var blocklyDiv = document.getElementById('blocklyDiv');
-var demoWorkspace = Blockly.inject('blocklyDiv', options);
-var onresize = function(e) {
-    // Compute the absolute coordinates and dimensions of blocklyArea.
-    var element = blocklyArea;
-    var x = 3;
-    var y = -5;
-    do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-    } while (element);
-    // Position blocklyDiv over blocklyArea.
-    blocklyDiv.style.left = x + 'px';
-    blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = blocklyArea.offsetWidth - 5 + 'px';
-    blocklyDiv.style.height = blocklyArea.offsetHeight + 5 + 'px';
-    Blockly.svgResize(demoWorkspace);
+/**
+ * List of tab names.
+ * @private
+ */
+Code.TABS_ = ['KAREL'];
+Code.selected = 'KAREL';
+
+/**
+ * Blockly injection
+ */
+Code.init = function () {
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    Code.workspace = Blockly.inject('blocklyDiv', Code.toolboxoptions);
+    var onresize = function(e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 3;
+        var y = -5;
+        do {
+            x += element.offsetLeft;
+            y += element.offsetTop;
+            element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x + 'px';
+        blocklyDiv.style.top = y + 'px';
+        blocklyDiv.style.width = blocklyArea.offsetWidth - 5 + 'px';
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 5 + 'px';
+        Blockly.svgResize(Code.workspace);
+    };
+    window.addEventListener('resize', onresize, false);
+    onresize();
+    Blockly.svgResize(Code.workspace);
+    
+    Code.workspace.addChangeListener(Code.generateCode);
+}
+
+/**
+ *  Generate code.
+ */
+Code.generateCode = function (event) {
+    let code;
+    if (Code.checkAllGeneratorFunctionsDefined(Blockly.KAREL)) {
+        const content = document.getElementById('codeTextArea');
+        content.textContent = '';
+        code = generator.workspaceToCode(Code.workspace);
+        content.textContent = code;
+        // Remove the 'prettyprinted' class, so that Prettify will recalculate.
+       // content.className = content.className.replace('prettyprinted', '');
+    }
 };
-window.addEventListener('resize', onresize, false);
-onresize();
-Blockly.svgResize(demoWorkspace);
+
+/**
+ * Check whether all blocks in use have generator functions.
+ * @param generator {!Blockly.Generator} The generator to use.
+ */
+Code.checkAllGeneratorFunctionsDefined = function (generator) {
+    const blocks = Code.workspace.getAllBlocks(false);
+    const missingBlockGenerators = [];
+    for (let i = 0; i < blocks.length; i++) {
+        const blockType = blocks[i].type;
+        if (!generator[blockType]) {
+            if (missingBlockGenerators.indexOf(blockType) === -1) {
+                missingBlockGenerators.push(blockType);
+            }
+        }
+    }
+
+    const valid = missingBlockGenerators.length === 0;
+    if (!valid) {
+        const msg = 'The generator code for the following blocks not specified for ' +
+            generator.name_ + ':\n - ' + missingBlockGenerators.join('\n - ');
+        Blockly.alert(msg); // Assuming synchronous. No callback.
+    }
+    return valid;
+};
+
+Code.init()

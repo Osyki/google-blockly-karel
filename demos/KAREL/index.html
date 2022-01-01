@@ -14,7 +14,6 @@
     <script src="generators/KAREL/prog_name.js"></script>
     <script src="generators/KAREL/variables.js"></script>
 
-
     <link href="style.css" rel="stylesheet">
 </head>
 
@@ -22,12 +21,13 @@
 <table id="mainTable">
     <!--    title row    -->
     <tr id="titleRow">
-        <td class="leftColumn" id="headerandoptions">
-            <h1>
+        <td class="leftColumn">
+            <div id="headerandoptions">
+            <div id="header">
                 <span id="title">KAREL</span>
                 <span id="version">Beta v0.1</span>
-            </h1>
-            <p>
+                </div>
+            <div id="options">
                 <button class="menuButton" onclick="showFilePopUp('saveFilePopUp')" title="Save your work.">Save Files
                 </button>
                 <button class="menuButton" onclick="showFilePopUp('loadFilePopUp')" title="Load your work.">Load Files
@@ -40,10 +40,14 @@
                 </button>
                 <button class="menuButton" onclick="showFilePopUp('newFilePopUp')" title="New File">New File</button>
                 <button class="menuButton" onclick="downloadCode()">Download Code</button>
-            </p>
+            </div>
+            </div>
+
         </td>
-        <td class="rightColumn" id="languageMenuCell">
-            <label for="languageMenu"></label><select id="languageMenu"></select>
+        <td class="rightColumn">
+            <div id="languageMenuCell">
+                <label for="languageMenu"></label><select id="languageMenu"></select>
+            </div>
         </td>
     </tr>
     <!--    tab row    -->
@@ -89,10 +93,6 @@
         <block type="prog_name"></block>
     </category>
 </xml>
-
-<script>
-
-</script>
 
 <!--    inject blockly    -->
 <script src="inject_blockly.js"></script>
