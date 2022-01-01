@@ -1,4 +1,4 @@
-/*td {*/
+/*td, table, div {*/
 /*    border: 1px solid black;*/
 /*}*/
 html, body {
@@ -14,54 +14,68 @@ h1 {
     font-weight: normal;
     font-size: 140%;
 }
-table {
+
+/*ids*/
+#tabletabs {
+    width: 100%;
+}
+#mainTable {
     height: 100%;
     width: 100%;
 }
 #blocklyDiv {
     position: absolute;
 }
-#codeCell {
-    height: 99%;
-    width: 20%;
+#blocklyrow {
+    height: 100%;
 }
-#codeArea {
-    height: 99%;
+#codeTextArea {
+    height: 98%;
     width: 97%;
+    resize: none;
+}
+#languageMenuCell {
+    text-align: right;
+    float: right;
+}
+#fileDropDownButton{
+
+}
+#tabfile {
+    border-bottom-color: #ddd !important;
+    background-color: #43a252;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
-.tabmax, .farSide {
-    text-align: right;
+/*Classes*/
+.leftColumn {
+    width: 80%;
+}
+.rightColumn {
+    width: 20%;
+}
+.menuButton {
+
 }
 .tabon {
-    width: 20%;
+    text-align: center;
+    width: 10%;
     color: white;
     border-bottom-color: black !important;
     background-color: #3366cc;
-    padding: 5px 19px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 .taboff {
-    width: 70%;
+    width: 80%;
     border-bottom-color: #ddd !important;
     background-color: #bbb;
-    padding: 5px 19px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-
 .taboff:hover {
     background-color: #eee;
 }
 
-.tabfile {
-    text-align: center;
-    width: 10%;
-    border-bottom-color: #ddd !important;
-    background-color: #43a252;
-    padding: 5px 19px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
 
-}

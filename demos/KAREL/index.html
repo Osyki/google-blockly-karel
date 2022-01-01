@@ -4,80 +4,99 @@
     <meta charset="utf-8">
     <title>Blockly KAREL Programming</title>
 
-    <script src="code.js"></script>
+    <!--    Blockly generators    -->
     <script src="../../blockly_compressed.js"></script>
     <script src="../../blocks_compressed.js"></script>
     <script src="../../msg/js/en.js"></script>
+
+    <!--    KAREL generators    -->
+    <script src="generators/KAREL"></script>
     <script src="generators/KAREL/prog_name.js"></script>
+    <script src="generators/KAREL/variables.js"></script>
 
-    <link rel="stylesheet" href="style.css">
+
+    <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
-<table id="table">
-<tr>
-    <td>
-        <h1>
-            <span id="title">KAREL</span>
-            <span id = "version">Beta v0.1</span>
-        </h1>
+<table id="mainTable">
+    <!--    title row    -->
+    <tr id="titleRow">
+        <td class="leftColumn">
+            <h1>
+                <span id="title">KAREL</span>
+                <span id="version">Beta v0.1</span>
+            </h1>
+            <p>
+                <button class="menuButton" onclick="showFilePopUp('saveFilePopUp')" title="Save your work.">Save Files
+                </button>
+                <button class="menuButton" onclick="showFilePopUp('loadFilePopUp')" title="Load your work.">Load Files
+                </button>
+                <input id="fileSaveBtn" multiple onchange="readFiles(this)" style="display:none"
+                       title="Load a blockly save into the program." type="file"/>
+                <button class="menuButton" onclick="showFilePopUp('renameFilePopUp')" title="Rename File">Rename File
+                </button>
+                <button class="menuButton" onclick="showFilePopUp('deleteFilePopUp')" title="Delete File">Delete File
+                </button>
+                <button class="menuButton" onclick="showFilePopUp('newFilePopUp')" title="New File">New File</button>
+                <button class="menuButton" onclick="downloadCode()">Download Code</button>
+            </p>
+        </td>
+        <td class="rightColumn" id="languageMenuCell">
+            <label for="languageMenu"></label><select id="languageMenu"></select>
+        </td>
+    </tr>
+    <!--    tab row    -->
+    <tr id="tabrow">
+        <td class="leftColumn" colspan=1>
+            <table id="tabletabs">
+                <tr>
+                    <td class="tabon" id="tabfile">
+                        <button class="tabbutton">Files...</button>
+                    </td>
 
-        <p>
-            <button onclick="showFilePopUp('saveFilePopUp')" title="Save your work.">Save Files</button>
-            <button onclick="showFilePopUp('loadFilePopUp')" title="Load your work.">Load Files</button>
-            <input type="file" id="fileSaveBtn" onchange="readFiles(this)" style="display:none"
-                   title="Load a blockly save into the program." multiple/>
-            <button onclick="showFilePopUp('renameFilePopUp')" title="Rename File">Rename File</button>
-            <button onclick="showFilePopUp('deleteFilePopUp')" title="Delete File">Delete File</button>
-            <button onclick="showFilePopUp('newFilePopUp')" title="New File">New File</button>
-            <button onclick="downloadCode()">Download Code</button>
-        </p>
-    </td>
-    <td class="farSide">
-        <br>
-        <select id="languageMenu"></select>
-    </td>
-</tr>
-<tr>
-    <td colspan=1>
-        <table>
-            <tr id="currentFile" >
-                <td class="tabfile">
-                    <div class="fdropdown">
-                        <button class="filedropdownbutton">Files...</button>
-                        <div id="fileDropDown" class="filedropdown-content">
-                            <a href="javascript:void(0)" id="prog_name.kl_file" onclick="makeFileVisible('prog_name.kl')">prog_name.kl</a>
-                        </div>
-                    </div>
-                </td>
+                    <td class="tabon" id="tab_KAREL">
+                        <button class="tabbutton">KAREL</button>
+                    </td>
+                    <td class="taboff" id="empty_tab"></td>
 
-                <td id="tab_KAREL" class="tabon">KAREL</td>
-                <td id="tab_xml" class="taboff"></td>
+                </tr>
+            </table>
+        </td>
+        <td>
 
-            </tr>
-        </table>
-    </td>
-</tr>
-<tr>
-    <td colspan=1 id="blocklyArea"></td>
-    <td colspan=1 id="codeCell">
-        <textarea id="codeArea" class="content" wrap="off">
-            Code prints here</textarea>
-        <pre id="content_karel" class="content prettyprint lang-c"></pre>
-        <pre id="karel_text" class="content prettyprint lang-c"></pre>
-    </td>
-</tr>
+        </td>
+    </tr>
+    <!--    blockly row    -->
+    <tr id="blocklyrow">
+        <td class="leftColumn" id="blocklyArea">
+            <div id="blocklyDiv"></div>
+        </td>
+        <td class="rightColumn" id="codeCell">
+            <textarea id="codeTextArea" wrap="off">Code prints here</textarea>
+        </td>
+    </tr>
 </table>
 
-<div id="blocklyDiv"></div>
+<div id="fileDropDown">
+    <a href="javascript:void(0)" id="prog_name.kl_file"
+       onclick="makeFileVisible('prog_name.kl')">prog_name.klnfmnasf,anf,manf,anf</a>
+</div>
 
-<xml xmlns="" id="toolbox" style="display: none">
-    <category name="New" colour="#134796">
+<xml id="toolbox" style="display: none" xmlns="">
+    <category colour="#134796" name="New">
         <label text="Begin program" web-class="labelClass"></label>
         <block type="prog_name"></block>
     </category>
 </xml>
 
+<script>
+
+</script>
+
+<!--    inject blockly    -->
 <script src="inject_blockly.js"></script>
 
 </body>
+
 </html>

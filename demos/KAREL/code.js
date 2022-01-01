@@ -3,6 +3,36 @@ goog.require('Blockly.Themes.Zelos');
 
 'use strict';
 
+var toolbox = document.getElementById("toolbox");
+var options = {
+    toolbox: toolbox,
+    comments: true,
+    collapse: true,
+    disable: true,
+    horizontalLayout: false,
+    maxBlocks: Infinity,
+    media: '../../media/',
+    oneBasedIndex: true,
+    readOnly: false,
+    rtl: false,
+    move: {
+        scrollbars: true,
+        drag: true,
+        wheel: false,
+    },
+    toolboxPosition: 'start',
+    renderer: 'zelos',
+    zoom:
+        {
+            controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 4,
+            minScale: 0.25,
+            scaleSpeed: 1.1
+        }
+};
+
 /**
  * Create a namespace for the application.
  */
@@ -292,14 +322,11 @@ Code.selected = 'KAREL';
  */
 Code.renderContent = function () {
     let content;
-    if (Code.selected === 'blocks') {
-        content = document.getElementById(currentFile);
-    } else {
-        content = document.getElementById('content_' + Code.selected);
-    }
+
+    content = document.getElementById('content_' + Code.selected);
 
     if (content.id === 'content_karel') {
-        Code.attemptCodeGeneration(Blockly.C); //FIXME: need to register KAREL code generator
+        Code.attemptCodeGeneration(Blockly.KAREL); //FIXME: need to register KAREL code generator
     }
     if (typeof PR === 'object') {
         PR.prettyPrint();
@@ -313,22 +340,22 @@ Code.renderContent = function () {
 Code.attemptCodeGeneration = function (generator) {
     let code;
     if (Code.checkAllGeneratorFunctionsDefined(generator) && Code.selected === 'KAREL') {
-        const content = document.getElementById('content_' + Code.selected);
+        const content = document.getElementById('code_area');
         content.textContent = '';
         console.log("KAREL generated code.");
         code = generator.workspaceToCode(Code.workspace);
         content.textContent = code;
         // Remove the 'prettyprinted' class, so that Prettify will recalculate.
-        content.className = content.className.replace('prettyprinted', '');
+        //content.className = content.className.replace('prettyprinted', '');
     }
-    if (Code.checkAllGeneratorFunctionsDefined(generator) && Code.selected === "KAREL") {
-        // Hao Loi: generate code to c_text element when blocks tab is selected.
-        const karel_text = document.getElementById('karel_text');
-        karel_text.textContent = '';
-        code = generator.workspaceToCode(Code.workspace);
-        karel_text.textContent = code;
-        karel_text.className = karel_text.className.replace('prettyprinted', '');
-    }
+    // if (Code.checkAllGeneratorFunctionsDefined(generator) && Code.selected === "KAREL") {
+    //     // Hao Loi: generate code to c_text element when blocks tab is selected.
+    //     const karel_text = document.getElementById('karel_text');
+    //     karel_text.textContent = '';
+    //     code = generator.workspaceToCode(Code.workspace);
+    //     karel_text.textContent = code;
+    //     karel_text.className = karel_text.className.replace('prettyprinted', '');
+    // }
 };
 
 /**
@@ -360,158 +387,30 @@ Code.checkAllGeneratorFunctionsDefined = function (generator) {
  * Initialize Blockly.  Called on page load.
  */
 Code.init = function () {
-    Code.initLanguage();
-    const rtl = Code.isRtl();
-    const container = document.getElementById('content_area');
-    const onresize = function (e) {
-        const bBox = Code.getBBox_(container);
-        // Sets initial code/ workspace areas dimensions and resizes them on change.
-        for (let i = 0; i < Code.TABS_.length; i++) {
-            if (Code.TABS_[i] === 'blocks') {
-                for (let j = 0; j < allFiles.length; j++) {
-                    const el = document.getElementById(allFiles[j]);
-                    el.style.top = bBox.y + 'px';
-                    el.style.left = bBox.x + 'px';
-                    el.style.height = bBox.height + 'px';
-                    el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
-                    el.style.width = bBox.width + 'px';
-                    el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
-                }
-                // Hao Loi: add c_text box to tab_blocks.  Set c_text visible; Important
-                // console.log('blocks');
-                const code_area = document.getElementById('code_area');
-                const bBox1 = Code.getBBox_(code_area);
-                const el1 = document.getElementById('c_text');
-                el1.style.top = bBox1.y + 'px';
-                el1.style.left = bBox1.x + 'px';
-                el1.style.height = bBox1.height + 'px';
-                el1.style.height = (2 * bBox1.height - el1.offsetHeight) + 'px';
-                el1.style.width = bBox1.width + 'px';
-                el1.style.width = (2 * bBox1.width - el1.offsetWidth) + 'px';
-                el1.style.visibility = 'visible';
-            } else {
-                const el2 = document.getElementById('content_' + Code.TABS_[i]);
-                el2.style.top = bBox.y + 'px';
-                el2.style.left = bBox.x + 'px';
-                // Height and width need to be set, read back, then set again to
-                // compensate for scrollbars.
-                el2.style.height = bBox.height + 'px';
-                el2.style.height = (2 * bBox.height - el2.offsetHeight) + 'px';
-                el2.style.width = bBox.width + 'px';
-                el2.style.width = (2 * bBox.width - el2.offsetWidth) + 'px';
-            }
-        }
-        // Make the 'Blocks' tab line up with the toolbox.
-        if (Code.workspace && Code.workspace.toolbox_.width) {
-            document.getElementById('tab_blocks').style.minWidth =
-                (Code.workspace.toolbox_.width - 38) + 'px';
-            // Account for the 19 pixel margin and on each side.
-        }
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var demoWorkspace = Blockly.inject('blocklyDiv', options);
+    var onresize = function(e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 0;
+        var y = 0;
+        do {
+            x += element.offsetLeft;
+            y += element.offsetTop;
+            element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x + 'px';
+        blocklyDiv.style.top = y + 'px';
+        blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+        Blockly.svgResize(demoWorkspace);
     };
     window.addEventListener('resize', onresize, false);
-
-    // The toolbox XML specifies each category name using Blockly's messaging
-    // format (eg. `<category name="%{BKY_CATLOGIC}">`).
-    // These message keys need to be defined in `Blockly.Msg` in order to
-    // be decoded by the library. Therefore, we'll use the `MSG` dictionary that's
-    // been defined for each language to import each category name message
-    // into `Blockly.Msg`.
-    // TODO: Clean up the message files so this is done explicitly instead of
-    // through this for-loop.
-    for (const messageKey in MSG) {
-        if (messageKey.indexOf('cat') === 0) {
-            Blockly.Msg[messageKey.toUpperCase()] = MSG[messageKey];
-        }
-    }
-
-    // Construct the toolbox XML, replacing translated variable names.
-    var toolboxText = document.getElementById('toolbox').outerHTML;
-    toolboxText = toolboxText.replace(/(^|[^%]){(\w+)}/g,
-        function (m, p1, p2) {
-            return p1 + MSG[p2];
-        });
-    var toolboxXml = Blockly.Xml.textToDom(toolboxText);
-
-    Code.workspace = Blockly.inject('Main.cpp', {
-        grid: {
-            spacing: 25,
-            length: 3,
-            colour: '#ccc',
-            snap: true
-        },
-        media: '../../media/',
-        rtl: rtl,
-        toolbox: toolboxXml,
-        zoom: {
-            controls: true,
-            wheel: true
-        }
-    });
-    // Hao Loi: realtime code generation.
-    Code.workspace.addChangeListener(Code.generateCode);
-
-
-    // Blockly.workspace.addChangeListener(Code.generateCode);
-    // Add to reserved word list: Local variables in execution environment (runJS)
-    // and the infinite loop detection function.
-    Blockly.C.addReservedWords('code,timeouts,checkTimeout');
-
-    Code.loadBlocks('');
-
-    if ('BlocklyStorage' in window) {
-        // Hook a save function onto unload.
-        BlocklyStorage.backupOnUnload(Code.workspace);
-    }
-
-    Code.tabClick(Code.selected);
-
-    Code.bindClick('trashButton',
-        function () {
-            Code.discard();
-            Code.renderContent();
-        });
-    Code.bindClick('runButton', Code.runJS);
-    // Disable the link button if page isn't backed by App Engine storage.
-    const linkButton = document.getElementById('linkButton');
-    if ('BlocklyStorage' in window) {
-        BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
-        BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
-        BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
-        BlocklyStorage['XML_ERROR'] = MSG['xmlError'];
-        Code.bindClick(linkButton,
-            function () {
-                BlocklyStorage.link(Code.workspace);
-            });
-    } else if (linkButton) {
-        linkButton.className = 'disabled';
-    }
-
-    for (let i = 0; i < Code.TABS_.length; i++) {
-        const name = Code.TABS_[i];
-        Code.bindClick('tab_' + name,
-            function (name_) {
-                return function () {
-                    Code.tabClick(name_);
-                };
-            }
-            (name));
-    }
     onresize();
-    Blockly.svgResize(Code.workspace);
+    Blockly.svgResize(demoWorkspace);
 
-    // Hao Loi add main block to the workspace
-    const workspace = Code.workspace; // your current workspace name what you given
-    const blockName = "main"; // Name of block to add
-
-    allWorkspaces.set("Main.cpp", workspace);
-    const newBlock = workspace.newBlock(blockName);
-    newBlock.initSvg();
-    newBlock.render();
-    // move the block to the right and down by 20,50 pixels
-    newBlock.moveBy(30, 50);
-    // Hao Loi: simulate click on the tab_c
-    // Lazy-load the syntax-highlighting.
-    window.setTimeout(Code.importPrettify, 1);
 };
 
 
@@ -519,9 +418,7 @@ Code.init = function () {
  *  Simulate click tabc then click tab_blocks to generate code.
  */
 Code.generateCode = function (event) {
-    // Code.tabClick('c');
-    // Code.tabClick('blocks');
-    Code.attemptCodeGeneration(Blockly.C);
+    Code.attemptCodeGeneration(Blockly.KAREL);
 };
 
 
@@ -594,50 +491,10 @@ document.write('<script src="../../msg/js/' + Code.LANG + '.js"></script>\n');
 
 window.addEventListener('load', Code.init);
 
-function autoInclude(libname, BlockScope, options) {
-    const libstring = 'include_' + libname;
-    //save the current scope
-    // let BlockScope = this;
-
-    const librarySearch = C_Include;
-    const libFound = librarySearch.search_library(this, [libstring]);
-
-
-    //Create the option to automate a string library creation
-    if (!libFound) {
-        const automate_library = {
-            text: 'include <' + libname + '>',
-            enabled: true,
-
-            callback: function () {
-                const newBlock = BlockScope.workspace.newBlock(libstring);
-                let ptr = BlockScope;
-
-                while (ptr) {
-                    //if we're at the top
-                    if (!ptr.parentBlock_) {
-                        newBlock.previousConnection.connect(ptr.previousConnection.targetConnection);
-                        newBlock.nextConnection.connect(ptr.previousConnection);
-                        newBlock.initSvg();
-                        newBlock.render();
-
-                        return;
-                    }
-
-                    ptr = ptr.parentBlock_;
-                }
-
-            }
-
-        };
-        options.push(automate_library);
-    }
-}
-
 // Holds the name of each workspace.
-var allFiles = ["Main.cpp",];
+var allFiles = ["prog_name.kl",];
 // Tracks the currently visible workspace.
-var currentFile = "Main.cpp";
+var currentFile = "prog_name.kl";
 // Map of all the divs holding workspaces.
 let allWorkspaces = new Map();
 
