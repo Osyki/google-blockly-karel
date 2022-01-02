@@ -16,7 +16,7 @@
  */
 
 /**
- * @fileoverview Helper functions for generating KAREL for blocks.
+ * @fileoverview Helper functions for generating Blockly.KAREL for blocks.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
@@ -24,13 +24,12 @@
 goog.provide('Blockly.KAREL');
 
 goog.require('Blockly.Generator');
-goog.require('Blockly.utils.string');
 
 /**
- * KAREL code generator.
+ * Blockly.KAREL code generator.
  * @type {!Blockly.Generator}
  */
-Blockly.KAREL = new Blockly.Generator('KAREL');
+Blockly.KAREL = new Blockly.Generator('Blockly.KAREL');
 
 /**
  * List of illegal variable names.
@@ -42,7 +41,7 @@ Blockly.KAREL = new Blockly.Generator('KAREL');
  Blockly.KAREL.addReservedWords(
 
 	// FANUC America Corporation SYSTEM R-30iA and R-30iB
-	// Controller KAREL Reference Manual
+	// Controller Blockly.KAREL Reference Manual
     'ABORT,CONST,GET_VAR,NOPAUSE,STOP,' +
 	'ABOUT,CONTINUE,GO,NOT,STRING,' +
 	'ABS,COORDINATED,GOTO,NOWAIT,STRUCTURE,' +
@@ -189,10 +188,10 @@ Blockly.KAREL.scrubNakedValue = function(line) {
 };
 
 /**
- * Encode a string as a properly escaped KAREL string, complete with
+ * Encode a string as a properly escaped Blockly.KAREL string, complete with
  * quotes.
  * @param {string} string Text to encode.
- * @return {string} KAREL string.
+ * @return {string} Blockly.KAREL string.
  * @private
  */
 Blockly.KAREL.quote_ = function(string) {
@@ -205,10 +204,10 @@ Blockly.KAREL.quote_ = function(string) {
 };
 
 /**
- * Encode a string as a properly escaped multiline KAREL string, complete
+ * Encode a string as a properly escaped multiline Blockly.KAREL string, complete
  * with quotes.
  * @param {string} string Text to encode.
- * @return {string} KAREL string.
+ * @return {string} Blockly.KAREL string.
  * @private
  */
 Blockly.KAREL.multiline_quote_ = function(string) {
@@ -219,13 +218,13 @@ Blockly.KAREL.multiline_quote_ = function(string) {
 };
 
 /**
- * Common tasks for generating KAREL from blocks.
+ * Common tasks for generating Blockly.KAREL from blocks.
  * Handles comments for the specified block and any connected value blocks.
  * Calls any statements following this block.
  * @param {!Blockly.Block} block The current block.
- * @param {string} code The KAREL code created for this block.
+ * @param {string} code The Blockly.KAREL code created for this block.
  * @param {boolean=} opt_thisOnly True to generate code for only this statement.
- * @return {string} KAREL code with comments and subsequent blocks added.
+ * @return {string} Blockly.KAREL code with comments and subsequent blocks added.
  * @private
  */
 Blockly.KAREL.scrub_ = function(block, code, opt_thisOnly) {
@@ -237,7 +236,7 @@ Blockly.KAREL.scrub_ = function(block, code, opt_thisOnly) {
 		if (comment) {
 			comment = Blockly.utils.string.wrap(comment,
 				Blockly.KAREL.COMMENT_WRAP - 3);
-			commentCode += Blockly.KAREL.prefixLines(comment + '\n', '-- ');
+			commentCode += Blockly.KAREL.prefixLines(comment + '\n', '// ');
 		}
 		// Collect comments for all value arguments.
 		// Don't collect comments for nested statements.
@@ -247,7 +246,7 @@ Blockly.KAREL.scrub_ = function(block, code, opt_thisOnly) {
 				if (childBlock) {
 					var comment = Blockly.KAREL.allNestedComments(childBlock);
 					if (comment) {
-						commentCode += Blockly.KAREL.prefixLines(comment, '-- ');
+						commentCode += Blockly.KAREL.prefixLines(comment, '// ');
 					}
 				}
 			}
@@ -321,4 +320,4 @@ Blockly.KAREL.getAdjusted = function(block, atId, opt_delta, opt_negate,
 	return at;
 };
 
-
+exports = Blockly.KAREL;

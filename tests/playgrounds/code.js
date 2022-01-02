@@ -42,6 +42,13 @@ function configurePlayground(playground) {
             ws.setTheme(ws.getTheme());
         });
     playground.addGenerator('KAREL', Blockly.KAREL);
+    playground.removeGenerator('JavaScript');
+    playground.removeGenerator('Python');
+    playground.removeGenerator('Lua');
+    playground.removeGenerator('PHP');
+    playground.removeGenerator('Dart');
+
+
 }
 
 function initPlayground() {
@@ -75,7 +82,7 @@ function initPlayground() {
         },
         toolbox: KARELtoolbox,
         toolboxPosition: 'start',
-        renderer: 'geras',
+        renderer: 'minimalist',
         zoom:
             {
                 controls: true,
@@ -84,7 +91,7 @@ function initPlayground() {
                 maxScale: 4,
                 minScale: 0.25,
                 scaleSpeed: 1.1
-            }
+            },
     };
 
     const playgroundConfig = {

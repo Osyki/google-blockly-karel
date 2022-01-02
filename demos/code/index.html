@@ -14,6 +14,12 @@
   <script src="../../php_compressed.js"></script>
   <script src="../../lua_compressed.js"></script>
   <script src="../../dart_compressed.js"></script>
+
+  <!--    KAREL generators    -->
+  <script src="generators/KAREL.js"></script>
+  <script src="generators/KAREL/prog_name.js"></script>
+  <script src="generators/KAREL/variables.js"></script>
+
   <script src="code.js"></script>
 </head>
 <body>
@@ -50,6 +56,8 @@
             <td class="tabmin tab_collapse">&nbsp;</td>
             <td id="tab_json" class="taboff tab_collapse">JSON</td>
             <td class="tabmin">&nbsp;</td>
+            <td id="tab_KAREL" class="taboff tab_collapse">KAREL</td>
+            <td class="tabmin">&nbsp;</td>
             <td id="tab_code" class="taboff">
               <select id="code_menu"></select>
             </td>
@@ -81,8 +89,13 @@
   <pre id="content_dart" class="content prettyprint lang-dart"></pre>
   <textarea id="content_xml" class="content" wrap="off"></textarea>
   <textarea id="content_json" class="content" wrap="off"></textarea>
+  <pre id="content_KAREL" class="content prettyprint lang-dart"></pre>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <category colour="#134796" name="New">
+      <label text="Begin program" web-class="labelClass"></label>
+      <block type="prog_name"></block>
+    </category>
     <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>

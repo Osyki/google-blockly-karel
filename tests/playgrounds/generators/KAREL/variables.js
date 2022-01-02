@@ -41,3 +41,39 @@ Blockly.KAREL['variables_set'] = function(block) {
     block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   return varName + ' : ' + argument0 + '\n';
 };
+
+/**
+ * Boolean Variables
+ * @type {{init: Blockly.Blocks.boolean.init}}
+ */
+Blockly.Blocks['boolean'] = {
+  init: function() {
+    this.appendStatementInput("boolean")
+        .setCheck("boolean")
+        .appendField(new Blockly.FieldVariable("boolVar"), "boolVarName")
+        .appendField(new Blockly.FieldDropdown([["logic","logic"], ["state","state"]]), "state/logic")
+        .appendField(new Blockly.FieldDropdown([["TRUE","true"], ["FALSE","false"]]), "logic")
+        .appendField(new Blockly.FieldDropdown([["ON","on"], ["OFF","off"]]), "state");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+/**
+ * 
+ * @param block
+ * @returns {string}
+ */
+Blockly.KAREL['boolean'] = function(block) {
+  var variable_boolvarname = Blockly.KAREL.nameDB_.getName(block.getFieldValue('boolVarName'), Blockly.Variables.NAME_TYPE);
+  var dropdown_state_logic = block.getFieldValue('state/logic');
+  var dropdown_logic = block.getFieldValue('logic');
+  var dropdown_state = block.getFieldValue('state');
+  var statements_boolean = Blockly.KAREL.statementToCode(block, 'boolean');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};

@@ -240,7 +240,7 @@ Code.LANG = Code.getLang();
  * @private
  */
 Code.TABS_ = [
-  'blocks', 'javascript', 'php', 'python', 'dart', 'lua', 'xml', 'json'
+  'blocks', 'javascript', 'php', 'python', 'dart', 'lua', 'xml', 'json', 'KAREL'
 ];
 
 /**
@@ -248,7 +248,7 @@ Code.TABS_ = [
  * @private
  */
 Code.TABS_DISPLAY_ = [
-  'Blocks', 'JavaScript', 'PHP', 'Python', 'Dart', 'Lua', 'XML', 'JSON'
+  'Blocks', 'JavaScript', 'PHP', 'Python', 'Dart', 'Lua', 'XML', 'JSON', 'KAREL'
 ];
 
 Code.selected = 'blocks';
@@ -365,6 +365,8 @@ Code.renderContent = function() {
     Code.attemptCodeGeneration(Blockly.Dart);
   } else if (content.id === 'content_lua') {
     Code.attemptCodeGeneration(Blockly.Lua);
+  } else if (content.id === 'content_KAREL') {
+    Code.attemptCodeGeneration(Blockly.KAREL);
   }
   if (typeof PR === 'object') {
     PR.prettyPrint();
@@ -379,8 +381,7 @@ Code.attemptCodeGeneration = function(generator) {
   var content = document.getElementById('content_' + Code.selected);
   content.textContent = '';
   if (Code.checkAllGeneratorFunctionsDefined(generator)) {
-    var code = generator.workspaceToCode(Code.workspace);
-    content.textContent = code;
+    content.textContent = generator.workspaceToCode(Code.workspace);
     // Remove the 'prettyprinted' class, so that Prettify will recalculate.
     content.className = content.className.replace('prettyprinted', '');
   }
