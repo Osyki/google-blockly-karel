@@ -1,34 +1,12 @@
-Blockly.Blocks['prog_name'] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("PROGRAM")
-      .appendField(new Blockly.FieldTextInput("prog_name"), "prog_name");
-    this.appendDummyInput();
-    this.appendStatementInput("translator directives")
-      .setCheck("Directives")
-      .setAlign(Blockly.ALIGN_RIGHT)
-      .appendField("Directives");
-    this.appendStatementInput("declarations")
-      .setCheck("Declarations")
-      .setAlign(Blockly.ALIGN_RIGHT)
-      .appendField("Declarations");
-    this.appendStatementInput("routines")
-      .setCheck("Routines")
-      .setAlign(Blockly.ALIGN_RIGHT)
-      .appendField("Routines");
-    this.appendDummyInput();
-    this.appendStatementInput("BEGIN")
-      .setCheck(null)
-      .appendField("BEGIN");
-    this.appendDummyInput()
-      .appendField("END");
-    this.setInputsInline(false);
-    this.setNextStatement(true, "Routines");
-    this.setColour(240);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  }
-};
+/**
+ * @fileoverview Generator file for arduino code variables
+ */
+
+'use strict';
+
+goog.provide('Blockly.Arduino.ProgName');
+
+goog.require('Blockly.KAREL');
 
 Blockly.KAREL['prog_name'] = function(block) {
   var text_prog_name = block.getFieldValue('prog_name');

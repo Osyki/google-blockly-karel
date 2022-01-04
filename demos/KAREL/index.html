@@ -15,6 +15,9 @@
     <script src="generators/KAREL/variables.js"></script>
 
     <link href="style.css" rel="stylesheet">
+
+    <!--    inject blockly    -->
+    <script src="inject_blockly.js"></script>
 </head>
 
 <body>
@@ -40,6 +43,7 @@
                 </button>
                 <button class="menuButton" onclick="showFilePopUp('newFilePopUp')" title="New File">New File</button>
                 <button class="menuButton" onclick="downloadCode()">Download Code</button>
+                <button class="menuButton" onclick="showCode()">Show Code</button>
             </div>
             </div>
 
@@ -95,8 +99,7 @@
     </category>
 </xml>
 
-<!--    inject blockly    -->
-<script src="inject_blockly.js"></script>
+
 
 </body>
 

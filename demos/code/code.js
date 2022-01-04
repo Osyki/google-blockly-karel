@@ -239,19 +239,15 @@ Code.LANG = Code.getLang();
  * List of tab names.
  * @private
  */
-Code.TABS_ = [
-  'blocks', 'javascript', 'php', 'python', 'dart', 'lua', 'xml', 'json', 'KAREL'
-];
+Code.TABS_ = ['KAREL'];
 
 /**
  * List of tab names with casing, for display in the UI.
  * @private
  */
-Code.TABS_DISPLAY_ = [
-  'Blocks', 'JavaScript', 'PHP', 'Python', 'Dart', 'Lua', 'XML', 'JSON', 'KAREL'
-];
+Code.TABS_DISPLAY_ = ['KAREL'];
 
-Code.selected = 'blocks';
+Code.selected = 'KAREL';
 
 /**
  * Switch the visible pane when a tab is clicked.
@@ -508,7 +504,11 @@ Code.init = function() {
   for (var i = 0; i < Code.TABS_.length; i++) {
     var name = Code.TABS_[i];
     Code.bindClick('tab_' + name,
-        function(name_) {return function() {Code.tabClick(name_);};}(name));
+        function(name_) {
+          return function() {
+            Code.tabClick(name_);
+          };
+        }(name));
   }
   Code.bindClick('tab_code', function(e) {
     if (e.target !== document.getElementById('tab_code')) {

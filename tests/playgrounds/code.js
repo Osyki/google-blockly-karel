@@ -42,7 +42,6 @@ function configurePlayground(playground) {
             ws.setTheme(ws.getTheme());
         });
     playground.addGenerator('KAREL', Blockly.KAREL);
-    playground.removeGenerator('JavaScript');
     playground.removeGenerator('Python');
     playground.removeGenerator('Lua');
     playground.removeGenerator('PHP');

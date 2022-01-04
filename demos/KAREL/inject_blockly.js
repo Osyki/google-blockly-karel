@@ -419,7 +419,6 @@ Code.init = function() {
         media: '../../media/',
         oneBasedIndex: true,
         readOnly: false,
-        rtl: false,
         move: {
             scrollbars: true,
             drag: true,
@@ -461,108 +460,17 @@ Code.init = function() {
     onresize();
     Blockly.svgResize(Code.workspace);
 
-    Code.workspace.addChangeListener(Code.generateCode);
-    // var rtl = Code.isRtl();
-    // var container = document.getElementById('content_area');
-    // var blocklyDiv = document.getElementById('blocklyDiv');
-    // var onresize = function(e) {
-    //     // Compute the absolute coordinates and dimensions of blocklyArea.
-    //     var element = blocklyArea;
-    //     var x = 3;
-    //     var y = -5;
-    //     do {
-    //         x += element.offsetLeft;
-    //         y += element.offsetTop;
-    //         element = element.offsetParent;
-    //     } while (element);
-    //     // Position blocklyDiv over blocklyArea.
-    //     blocklyDiv.style.left = x + 'px';
-    //     blocklyDiv.style.top = y + 'px';
-    //     blocklyDiv.style.width = blocklyArea.offsetWidth - 5 + 'px';
-    //     blocklyDiv.style.height = blocklyArea.offsetHeight + 5 + 'px';
-    //     Blockly.svgResize(Code.workspace);
-    // };
-    // window.addEventListener('resize', onresize, false);
-    //
-    // // The toolbox XML specifies each category name using Blockly's messaging
-    // // format (eg. `<category name="%{BKY_CATLOGIC}">`).
-    // // These message keys need to be defined in `Blockly.Msg` in order to
-    // // be decoded by the library. Therefore, we'll use the `MSG` dictionary that's
-    // // been defined for each language to import each category name message
-    // // into `Blockly.Msg`.
-    // // TODO: Clean up the message files so this is done explicitly instead of
-    // // through this for-loop.
-    // for (var messageKey in MSG) {
-    //     if (messageKey.indexOf('cat') === 0) {
-    //         Blockly.Msg[messageKey.toUpperCase()] = MSG[messageKey];
-    //     }
-    // }
-    //
-    // // Construct the toolbox XML, replacing translated variable names.
-    // var toolboxText = document.getElementById('toolbox').outerHTML;
-    // toolboxText = toolboxText.replace(/(^|[^%]){(\w+)}/g,
-    //     function(m, p1, p2) {
-    //         return p1 + MSG[p2];
-    //     });
-    // var toolboxXml = Blockly.Xml.textToDom(toolboxText);
-    //
-    // Code.workspace = Blockly.inject('blocklyDiv', Code.toolbox);
-    //
-    // // // Add to reserved word list: Local variables in execution environment (runJS)
-    // // // and the infinite loop detection function.
-    // // Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
-    // //
-    // // Code.loadBlocks('');
-    // //
-    // // if ('BlocklyStorage' in window) {
-    // //     // Hook a save function onto unload.
-    // //     BlocklyStorage.backupOnUnload(Code.workspace);
-    // // }
-    // //
-    // // Code.tabClick(Code.selected);
-    // //
-    // // Code.bindClick('trashButton',
-    // //     function() {Code.discard(); Code.renderContent();});
-    // // Code.bindClick('runButton', Code.runJS);
-    // // // Disable the link button if page isn't backed by App Engine storage.
-    // // var linkButton = document.getElementById('linkButton');
-    // // if ('BlocklyStorage' in window) {
-    // //     BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
-    // //     BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
-    // //     BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
-    // //     BlocklyStorage['XML_ERROR'] = MSG['loadError'];
-    // //     Code.bindClick(linkButton,
-    // //         function() {BlocklyStorage.link(Code.workspace);});
-    // // } else if (linkButton) {
-    // //     linkButton.className = 'disabled';
-    // // }
-    // //
-    // // for (var i = 0; i < Code.TABS_.length; i++) {
-    // //     var name = Code.TABS_[i];
-    // //     Code.bindClick('tab_' + name,
-    // //         function(name_) {return function() {Code.tabClick(name_);};}(name));
-    // // }
-    // // Code.bindClick('tab_code', function(e) {
-    // //     if (e.target !== document.getElementById('tab_code')) {
-    // //         // Prevent clicks on child codeMenu from triggering a tab click.
-    // //         return;
-    // //     }
-    // //     Code.changeCodingLanguage();
-    // // });
-    //
-    // onresize();
-    // Blockly.svgResize(Code.workspace);
-    // //
-    // // // Lazy-load the syntax-highlighting.
-    // // window.setTimeout(Code.importPrettify, 1);
+    let realTimeGenerator = function() {
+        var code = Blockly.KAREL.workspaceToCode(Code.workspace);
+        alert(code);
+    };
+    Code.workspace.addChangeListener(realTimeGenerator);
 
 };
 
-// Load the Code demo's language strings.
-document.write('<script src="msg/' + Code.LANG + '.js"></script>\n');
-// Load Blockly's language strings.
-document.write('<script src="../../msg/js/' + Code.LANG + '.js"></script>\n');
+function showCode() {
+    var code = Blockly.KAREL.workspaceToCode(Code.workspace);
+    alert("test");
+}
 
 window.addEventListener('load', Code.init);
-
-Code.init();

@@ -223,68 +223,33 @@ Code.LANG = Code.getLang();
 Code.TABS_ = ['KAREL'];
 Code.selected = 'KAREL';
 
-// /**
-//  * Switch the visible pane when a tab is clicked.
-//  * @param {string} clickedName Name of tab clicked.
-//  */
-// Code.tabClick = function (clickedName) {
-//     // // If the XML tab was open, save and render the content.
-//     // if (document.getElementById('tab_xml').className === 'tabon') {
-//     //     const xmlTextarea = document.getElementById('content_xml');
-//     //     const xmlText = xmlTextarea.value;
-//     //     let xmlDom = null;
-//     //     try {
-//     //         xmlDom = Blockly.Xml.textToDom(xmlText);
-//     //     } catch (e) {
-//     //         const q =
-//     //             window.confirm(MSG['badXml'].replace('%1', e));
-//     //         if (!q) {
-//     //             // Leave the user on the XML tab.
-//     //             return;
-//     //         }
-//     //     }
-//     //     if (xmlDom) {
-//     //         Code.workspace.clear();
-//     //         Blockly.Xml.domToWorkspace(xmlDom, Code.workspace);
-//     //     }
-//     // }
-//
-//     if (document.getElementById('tab_blocks').className === 'tabon') {
-//         Code.workspace.setVisible(false);
-//     }
-//     // Deselect all tabs and hide all panes.
-//     for (let i = 0; i < Code.TABS_.length; i++) {
-//         const name = Code.TABS_[i];
-//         document.getElementById('tab_' + name).className = 'taboff';
-//         if (name === 'blocks') {
-//             for (var j = 0; j < allFiles.length; j++) {
-//                 document.getElementById(allFiles[j]).style.visibility = 'hidden';
-//             }
-//         } else {
-//             document.getElementById('content_' + name).style.visibility = 'hidden';
-//         }
-//     }
-//     // Hao Loi: turn off c_text element
-//     document.getElementById('c_text').style.visibility = 'hidden';
-//     // Select the active tab.
-//     Code.selected = clickedName;
-//     if (clickedName === 'KAREL') {
-//         document.getElementById('tab_' + clickedName).className = 'tabon';
-//         // Show the selected pane.
-//         document.getElementById('content_' + clickedName).style.visibility = 'visible';
-//     } else if (clickedName === 'blocks') {
-//         document.getElementById('tab_' + clickedName).className = 'tabon';
-//         Code.workspace.setVisible(true);
-//
-//         document.getElementById(currentFile).style.visibility = 'visible';
-//         // Hao Loi: turn on c_text element
-//         document.getElementById('c_text').style.visibility = 'visible';
-//         Code.attemptCodeGeneration(Blockly.C);
-//     }
-//     Code.renderContent();
-//     Blockly.svgResize(Code.workspace);
-//
-// };
+/**
+ * Switch the visible pane when a tab is clicked.
+ * @param {string} clickedName Name of tab clicked.
+ */
+Code.tabClick = function (clickedName) {
+    if (document.getElementById('tab_blocks').className === 'tabon') {
+        Code.workspace.setVisible(true);
+    }
+    // Select the active tab.
+    Code.selected = clickedName;
+    if (clickedName === 'KAREL') {
+        document.getElementById('tab_' + clickedName).className = 'tabon';
+        // Show the selected pane.
+        document.getElementById('content_' + clickedName).style.visibility = 'visible';
+    } else if (clickedName === 'blocks') {
+        document.getElementById('tab_' + clickedName).className = 'tabon';
+        Code.workspace.setVisible(true);
+
+        document.getElementById(currentFile).style.visibility = 'visible';
+        // Hao Loi: turn on c_text element
+        document.getElementById('c_text').style.visibility = 'visible';
+        Code.attemptCodeGeneration(Blockly.C);
+    }
+    Code.renderContent();
+    Blockly.svgResize(Code.workspace);
+
+};
 
 
 /**
@@ -360,53 +325,55 @@ Code.checkAllGeneratorFunctionsDefined = function (generator) {
  * Initialize Blockly.  Called on page load.
  */
 Code.init = function () {
-    Code.initLanguage();
-    const rtl = Code.isRtl();
-    const container = document.getElementById('content_area');
-    const onresize = function (e) {
-        const bBox = Code.getBBox_(container);
-        // Sets initial code/ workspace areas dimensions and resizes them on change.
-        for (let i = 0; i < Code.TABS_.length; i++) {
-            if (Code.TABS_[i] === 'blocks') {
-                for (let j = 0; j < allFiles.length; j++) {
-                    const el = document.getElementById(allFiles[j]);
-                    el.style.top = bBox.y + 'px';
-                    el.style.left = bBox.x + 'px';
-                    el.style.height = bBox.height + 'px';
-                    el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
-                    el.style.width = bBox.width + 'px';
-                    el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
-                }
-                // Hao Loi: add c_text box to tab_blocks.  Set c_text visible; Important
-                // console.log('blocks');
-                const code_area = document.getElementById('code_area');
-                const bBox1 = Code.getBBox_(code_area);
-                const el1 = document.getElementById('c_text');
-                el1.style.top = bBox1.y + 'px';
-                el1.style.left = bBox1.x + 'px';
-                el1.style.height = bBox1.height + 'px';
-                el1.style.height = (2 * bBox1.height - el1.offsetHeight) + 'px';
-                el1.style.width = bBox1.width + 'px';
-                el1.style.width = (2 * bBox1.width - el1.offsetWidth) + 'px';
-                el1.style.visibility = 'visible';
-            } else {
-                const el2 = document.getElementById('content_' + Code.TABS_[i]);
-                el2.style.top = bBox.y + 'px';
-                el2.style.left = bBox.x + 'px';
-                // Height and width need to be set, read back, then set again to
-                // compensate for scrollbars.
-                el2.style.height = bBox.height + 'px';
-                el2.style.height = (2 * bBox.height - el2.offsetHeight) + 'px';
-                el2.style.width = bBox.width + 'px';
-                el2.style.width = (2 * bBox.width - el2.offsetWidth) + 'px';
+
+    //default toolbox
+    Code.toolboxoptions = {
+        toolbox: toolbox,
+        comments: true,
+        collapse: true,
+        disable: true,
+        horizontalLayout: false,
+        maxBlocks: Infinity,
+        media: '../../media/',
+        oneBasedIndex: true,
+        readOnly: false,
+        rtl: false,
+        move: {
+            scrollbars: true,
+            drag: true,
+            wheel: false,
+        },
+        toolboxPosition: 'start',
+        zoom:
+            {
+                controls: true,
+                wheel: true,
+                startScale: 1.0,
+                maxScale: 4,
+                minScale: 0.25,
+                scaleSpeed: 1.1
             }
-        }
-        // Make the 'Blocks' tab line up with the toolbox.
-        if (Code.workspace && Code.workspace.toolbox_.width) {
-            document.getElementById('tab_blocks').style.minWidth =
-                (Code.workspace.toolbox_.width - 38) + 'px';
-            // Account for the 19 pixel margin and on each side.
-        }
+    };
+
+    var blocklyArea = document.getElementById('content_area');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    Code.workspace = Blockly.inject('blocklyDiv', Code.toolboxoptions);
+    var onresize = function(e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 3;
+        var y = -5;
+        do {
+            x += element.offsetLeft;
+            y += element.offsetTop;
+            element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x + 'px';
+        blocklyDiv.style.top = y + 'px';
+        blocklyDiv.style.width = blocklyArea.offsetWidth - 5 + 'px';
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 5 + 'px';
+        Blockly.svgResize(Code.workspace);
     };
     window.addEventListener('resize', onresize, false);
 
@@ -432,21 +399,6 @@ Code.init = function () {
         });
     var toolboxXml = Blockly.Xml.textToDom(toolboxText);
 
-    Code.workspace = Blockly.inject('Main.cpp', {
-        grid: {
-            spacing: 25,
-            length: 3,
-            colour: '#ccc',
-            snap: true
-        },
-        media: '../../media/',
-        rtl: rtl,
-        toolbox: toolboxXml,
-        zoom: {
-            controls: true,
-            wheel: true
-        }
-    });
     // Hao Loi: realtime code generation.
     Code.workspace.addChangeListener(Code.generateCode);
 
@@ -454,7 +406,7 @@ Code.init = function () {
     // Blockly.workspace.addChangeListener(Code.generateCode);
     // Add to reserved word list: Local variables in execution environment (runJS)
     // and the infinite loop detection function.
-    Blockly.C.addReservedWords('code,timeouts,checkTimeout');
+    Blockly.KAREL.addReservedWords('code,timeouts,checkTimeout');
 
     Code.loadBlocks('');
 
@@ -463,48 +415,15 @@ Code.init = function () {
         BlocklyStorage.backupOnUnload(Code.workspace);
     }
 
-    Code.tabClick(Code.selected);
-
-    Code.bindClick('trashButton',
-        function () {
-            Code.discard();
-            Code.renderContent();
-        });
-    Code.bindClick('runButton', Code.runJS);
-    // Disable the link button if page isn't backed by App Engine storage.
-    const linkButton = document.getElementById('linkButton');
-    if ('BlocklyStorage' in window) {
-        BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
-        BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
-        BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
-        BlocklyStorage['XML_ERROR'] = MSG['xmlError'];
-        Code.bindClick(linkButton,
-            function () {
-                BlocklyStorage.link(Code.workspace);
-            });
-    } else if (linkButton) {
-        linkButton.className = 'disabled';
-    }
-
-    for (let i = 0; i < Code.TABS_.length; i++) {
-        const name = Code.TABS_[i];
-        Code.bindClick('tab_' + name,
-            function (name_) {
-                return function () {
-                    Code.tabClick(name_);
-                };
-            }
-            (name));
-    }
     onresize();
     Blockly.svgResize(Code.workspace);
 
     // Hao Loi add main block to the workspace
-    const workspace = Code.workspace; // your current workspace name what you given
+    //const workspace = Code.workspace; // your current workspace name what you given
     const blockName = "main"; // Name of block to add
 
-    allWorkspaces.set("Main.cpp", workspace);
-    const newBlock = workspace.newBlock(blockName);
+    //allWorkspaces.set("Main.cpp", workspace);
+    const newBlock = Code.workspace.newBlock("prog_name");
     newBlock.initSvg();
     newBlock.render();
     // move the block to the right and down by 20,50 pixels
