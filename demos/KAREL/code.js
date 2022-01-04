@@ -420,7 +420,7 @@ Code.init = function () {
 
     // Hao Loi add main block to the workspace
     //const workspace = Code.workspace; // your current workspace name what you given
-    const blockName = "main"; // Name of block to add
+    // const blockName = "main"; // Name of block to add
 
     //allWorkspaces.set("Main.cpp", workspace);
     const newBlock = Code.workspace.newBlock("prog_name");
@@ -438,9 +438,7 @@ Code.init = function () {
  *  Simulate click tabc then click tab_blocks to generate code.
  */
 Code.generateCode = function (event) {
-    // Code.tabClick('c');
-    // Code.tabClick('blocks');
-    Code.attemptCodeGeneration(Blockly.C);
+    Code.attemptCodeGeneration(Blockly.KAREL);
 };
 
 

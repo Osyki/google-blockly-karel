@@ -1,3 +1,5 @@
+goog.require('Blockly.KAREL');
+
 /**
  * Create a namespace for the application.
  */
@@ -368,12 +370,12 @@ Code.renderContent = function() {
  */
 Code.attemptCodeGeneration = function(generator) {
     var content = document.getElementById('codeTextArea');
-    content.textContent = '';
+    content.textContent += 'thisisatest';
     if (Code.checkAllGeneratorFunctionsDefined(generator)) {
-        var code = generator.workspaceToCode(Code.workspace);
+        var code = Blockly.KAREL.workspaceToCode(Code.workspace);
         content.textContent = code;
         // Remove the 'prettyprinted' class, so that Prettify will recalculate.
-        content.className = content.className.replace('prettyprinted', '');
+        // content.className = content.className.replace('prettyprinted', '');
     }
 };
 
@@ -459,18 +461,15 @@ Code.init = function() {
     window.addEventListener('resize', onresize, false);
     onresize();
     Blockly.svgResize(Code.workspace);
-
-    let realTimeGenerator = function() {
-        var code = Blockly.KAREL.workspaceToCode(Code.workspace);
-        alert(code);
-    };
-    Code.workspace.addChangeListener(realTimeGenerator);
+    
+    Code.workspace.addChangeListener(showCode);
 
 };
 
 function showCode() {
+    var content = document.getElementById('codeTextArea');
     var code = Blockly.KAREL.workspaceToCode(Code.workspace);
-    alert("test");
+    content.textContent = code;
 }
 
 window.addEventListener('load', Code.init);
