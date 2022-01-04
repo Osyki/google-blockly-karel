@@ -470,6 +470,7 @@ function showCode() {
     var content = document.getElementById('codeTextArea');
     var code = Blockly.KAREL.workspaceToCode(Code.workspace);
     content.textContent = code;
+    content.className = content.className.replace('prettyprinted', '');
 }
 
 window.addEventListener('load', Code.init);
