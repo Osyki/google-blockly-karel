@@ -43,6 +43,8 @@ body {
 #fileDropDownButton{
 
 }
+#tabrow {
+}
 #tabfile {
     border-bottom-color: #ddd !important;
     background-color: #43a252;
@@ -53,12 +55,22 @@ body {
     display: flex;
     justify-content: space-between;
     padding-left: 5px;
+    align-content: flex-end;
 }
 #titleRow {
 }
 #header {
+    display: flex;
+    flex-wrap: nowrap;
+}
+#version {
+    display: flex;
+    align-content: center;
 }
 #options {
+    display: flex;
+    flex-wrap: nowrap;
+
 }
 #codeCell {
     /*height: 50%;*/
@@ -77,7 +89,7 @@ body {
     width: 40%;
 }
 .menuButton {
-
+    margin: 3px;
 }
 .tabon {
     text-align: center;

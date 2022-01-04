@@ -445,7 +445,7 @@ Code.init = function() {
         // Compute the absolute coordinates and dimensions of blocklyArea.
         var element = blocklyArea;
         var x = 3;
-        var y = -10;
+        var y = -18;
         do {
             x += element.offsetLeft;
             y += element.offsetTop;
@@ -455,13 +455,13 @@ Code.init = function() {
         blocklyDiv.style.left = x + 'px';
         blocklyDiv.style.top = y + 'px';
         blocklyDiv.style.width = blocklyArea.offsetWidth - 6 + 'px';
-        blocklyDiv.style.height = blocklyArea.offsetHeight + 5 + 'px';
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 8 + 'px';
         Blockly.svgResize(Code.workspace);
     };
     window.addEventListener('resize', onresize, false);
     onresize();
     Blockly.svgResize(Code.workspace);
-    
+
     Code.workspace.addChangeListener(showCode);
 
 };

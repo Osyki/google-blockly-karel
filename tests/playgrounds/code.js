@@ -19,23 +19,23 @@ function start() {
 }
 
 function createWorkspace(blocklyDiv, options) {
-    var workspace = Blockly.inject(blocklyDiv, options);
+    const workspace = Blockly.inject(blocklyDiv, options);
     workspace.configureContextMenu = configureContextMenu.bind(workspace);
     return workspace;
 }
 
 function configurePlayground(playground) {
     // Rendering options.
-    var gui = playground.getGUI();
-    var renderingFolder = gui.addFolder('Rendering');
-    var renderingOptions = {
+    const gui = playground.getGUI();
+    const renderingFolder = gui.addFolder('Rendering');
+    const renderingOptions = {
         'font Size': 10,
     };
     renderingFolder.add(renderingOptions, 'font Size', 0, 50)
         .onChange(function(value) {
-            var ws = playground.getWorkspace();
-            var fontStyle = {
-                'size': value
+            const ws = playground.getWorkspace();
+            const fontStyle = {
+                'size': value,
             };
             ws.getTheme().setFontStyle(fontStyle);
             // Refresh theme.
@@ -46,8 +46,6 @@ function configurePlayground(playground) {
     playground.removeGenerator('Lua');
     playground.removeGenerator('PHP');
     playground.removeGenerator('Dart');
-
-
 }
 
 function initPlayground() {
@@ -55,7 +53,7 @@ function initPlayground() {
         alert('You need to run \'npm install\' in order to use this playground.');
         return;
     }
-    var defaultOptions = {
+    const defaultOptions = {
         comments: true,
         collapse: true,
         disable: true,
@@ -64,7 +62,7 @@ function initPlayground() {
                 spacing: 25,
                 length: 3,
                 colour: '#ccc',
-                snap: true
+                snap: true,
             },
         horizontalLayout: false,
         maxBlocks: Infinity,
@@ -89,7 +87,7 @@ function initPlayground() {
                 startScale: 1.0,
                 maxScale: 4,
                 minScale: 0.25,
-                scaleSpeed: 1.1
+                scaleSpeed: 1.1,
             },
     };
 
@@ -98,7 +96,7 @@ function initPlayground() {
             'categories': toolboxCategories,
             'simple': toolboxSimple,
             'test blocks': toolboxTestBlocks,
-        }
+        },
     };
 
     createPlayground(document.getElementById('root'), createWorkspace,
@@ -123,13 +121,13 @@ function setBackgroundColour() {
 
 
 function configureContextMenu(menuOptions, e) {
-    var workspace = this;
-    var screenshotOption = {
+    const workspace = this;
+    const screenshotOption = {
         text: 'Download Screenshot',
         enabled: workspace.getTopBlocks().length,
         callback: function() {
             Blockly.downloadScreenshot(workspace);
-        }
+        },
     };
     menuOptions.push(screenshotOption);
 
