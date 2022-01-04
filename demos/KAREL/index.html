@@ -44,7 +44,7 @@
                 </button>
                 <button class="menuButton" onclick="showFilePopUp('newFilePopUp')" title="New File">New File</button>
                 <button class="menuButton" onclick="downloadCode()">Download Code</button>
-                <button class="menuButton" onclick="showCode()">Show Code</button>
+<!--                <button class="menuButton" onclick="showCode()">Show Code</button>-->
             </div>
             </div>
 
@@ -72,8 +72,9 @@
                 </tr>
             </table>
         </td>
-        <td>
-
+        <td rowspan=2 class="rightColumn" id="codeCell">
+            <!--            <pre id="codeTextArea" class="content prettyprint lang-py"></pre>-->
+            <textarea id="codeTextArea" wrap="off" spellcheck="false">Code prints here</textarea>
         </td>
     </tr>
     <!--    blockly row    -->
@@ -81,9 +82,8 @@
         <td class="leftColumn" id="content_area">
             <div id="blocklyDiv"></div>
         </td>
-        <td class="rightColumn" id="codeCell">
-            <pre id="codeTextArea" class="content prettyprint lang-py"></pre>
-<!--            <textarea id="codeTextArea" wrap="off">Code prints here</textarea>-->
+        <td>
+
         </td>
     </tr>
 </table>
