@@ -42,10 +42,10 @@ function configurePlayground(playground) {
             ws.setTheme(ws.getTheme());
         });
     playground.addGenerator('KAREL', Blockly.KAREL);
-    playground.removeGenerator('Python');
-    playground.removeGenerator('Lua');
-    playground.removeGenerator('PHP');
-    playground.removeGenerator('Dart');
+    // playground.removeGenerator('Python');
+    // playground.removeGenerator('Lua');
+    // playground.removeGenerator('PHP');
+    // playground.removeGenerator('Dart');
 }
 
 function initPlayground() {
