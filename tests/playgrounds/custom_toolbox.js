@@ -1,9 +1,36 @@
-var KARELtoolbox = `
-<xml id="toolbox" style="display: none">
-<category name="New" colour="#134796">
-        <label text="Begin program" web-class="labelClass"></label>
-        <block type="prog_name"></block>
-    </category>
-</xml>
-`;
+goog.provide('KARELtoolbox');
+
+'use strict';
+
+var KARELtoolbox = {
+    "kind": "categoryToolbox",
+    "contents": [
+        {
+            "kind": "category",
+            "name": "New",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "prog_name",
+                },
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Variables",
+            "custom": "VARIABLE"
+        },
+        {
+            "kind": "category",
+            "name": "Simple Variables",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "simple_var",
+                },
+            ],
+        },
+    ],
+};
+
 

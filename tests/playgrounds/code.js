@@ -3,6 +3,9 @@
 goog.require('Blockly.minimalist.Renderer');
 goog.require('Blockly.Themes.Zelos');
 
+//Requires toolbox
+goog.require('KARELtoolbox');
+
 // Other.
 goog.require('Blockly.WorkspaceCommentSvg');
 goog.require('Blockly.Dart.all');
