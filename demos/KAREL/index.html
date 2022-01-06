@@ -11,11 +11,13 @@
     <!-- KAREL Blocks -->
     <script src="../../blocks/prog_name.js"></script>
     <script src="../../blocks/KAREL/Simplevariables.js"></script>
+    <script src="../../blocks/KAREL/TYPE.js"></script>
 
     <!--   KAREL Generators   -->
     <script src="../../generators/KAREL.js"></script>
     <script src="../../generators/KAREL/prog_name.js"></script>
     <script src="../../generators/KAREL/Simplevariables.js"></script>
+    <script src="../../generators/KAREL/TYPE.js"></script>
 
     <link href="style.css" rel="stylesheet">
 
@@ -72,6 +74,9 @@
                     <td class="tabon" id="tab_KAREL">
                         <button class="tabbutton">KAREL</button>
                     </td>
+                    <td class="tabon" id="tab_C++">
+                        <button class="tabbutton">C++</button>
+                    </td>
                     <td class="taboff" id="empty_tab"></td>
 
                 </tr>
@@ -97,12 +102,30 @@
 
 <xml id="toolbox" style="display: none" xmlns="">
     <category colour="#134796" name="New">
-        <label text="Begin program" web-class="labelClass"></label>
+        <label text="Program Outline" web-class="labelClass"></label>
         <block type="prog_name"></block>
     </category>
-    <category colour="#134796" name="Variables">
-        <label text="Begin program" web-class="labelClass"></label>
+    <category colour="#134796" name="Comments">
+        <label text="Comments" web-class="labelClass"></label>
+        <block type="karel_type"></block>
+        <label text="Comments" web-class="labelClass"></label>
+        <block type="STRUCTURE"></block>
+    </category>
+    <category colour="#134796" name="Directives">
+        <label text="External Code" web-class="labelClass"></label>
         <block type="simple_var"></block>
+    </category>
+    <category colour="#134796" name="Variables">
+        <label text="Custom Values" web-class="labelClass"></label>
+        <block type="prog_name"></block>
+    </category>
+    <category colour="#134796" name="Routine">
+        <label text="Placeholder" web-class="labelClass"></label>
+        <block type="prog_name"></block>
+    </category>
+    <category colour="#134796" name="Structures">
+        <label text="Placeholder" web-class="labelClass"></label>
+        <block type="prog_name"></block>
     </category>
 </xml>
 

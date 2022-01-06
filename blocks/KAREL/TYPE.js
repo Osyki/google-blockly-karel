@@ -29,11 +29,9 @@
  */
 'use strict';
 
-goog.provide('Blockly.Constants.Simplevariables');
-
-goog.require('Blockly.Blocks');
+goog.provide('Blockly.blocks.TYPE');
 goog.require('Blockly');
-
+goog.require('Blockly.Blocks');
 
 /**
  * Unused constant for the common HSV hue for all blocks in this category.
@@ -41,43 +39,38 @@ goog.require('Blockly');
  */
 
 Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
-    // Block for set simple data type
+    // Block for TYPE block, used to hold STRUCTURE
     {
-        "type": "simple_var",
-        "message0": "%1 : %2",
+        "type": "karel_type",
+        "message0": "TYPE :  %1",
+        "args0": [
+            {
+                "type": "input_statement",
+                "name": "KAREL_structure",
+                "check": "STRUCTURE"
+            }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": 230,
+        "tooltip": "",
+        "helpUrl": ""
+    },
+    {
+        "type": "STRUCTURE",
+        "message0": "%1 = STRUCTURE %2",
         "args0": [
             {
                 "type": "field_variable",
-                "name": "var_name",
-                "variable": "var_name",
+                "name": "NAME",
+                "variable": "Name"
             },
             {
-                "type": "field_dropdown",
-                "name": "var_type",
-                "options": [
-                    [
-                        "BOOLEAN",
-                        "BOOLEAN",
-                    ],
-                    [
-                        "FILE",
-                        "FILE",
-                    ],
-                    [
-                        "INTEGER",
-                        "INTEGER",
-                    ],
-                    [
-                        "REAL",
-                        "REAL",
-                    ],
-                    [
-                        "STRING",
-                        "STRING",
-                    ],
-                ],
-            },
+                "type": "input_statement",
+                "name": "KAREL_varname"
+            }
         ],
+        "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
         "colour": 230,
