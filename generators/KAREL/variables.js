@@ -29,7 +29,7 @@ goog.require('Blockly.KAREL');
 Blockly.KAREL['variables_get'] = function(block) {
   // Variable getter.
   var code = Blockly.KAREL.variableDB_.getName(block.getFieldValue('VAR'),
-    Blockly.Variables.NAME_TYPE);
+    Blockly.VARIABLE_CATEGORY_NAME);
   return [code, Blockly.KAREL.ORDER_ATOMIC];
 };
 
