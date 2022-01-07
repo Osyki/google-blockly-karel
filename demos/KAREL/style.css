@@ -53,16 +53,12 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    /*border-top-style: solid;*/
-    /*border-top-width: thin;*/
-    /*border-top-color: #ddd;*/
 }
 
 #filesDropdown {
     color: #222;
     border-style: none;
     font-size: medium;
-    /*margin-right: 4px;*/
     padding: 5px 5px 0 5px;
     background-color: #ddd;
     border-radius: 0;
@@ -82,6 +78,9 @@ body {
     resize: none;
     margin: 0;
     border: none;
+    border-top-style: solid;
+    border-top-color: #999;
+    border-top-width: thin;
     font-family: 'Open Sans', sans-serif;
     background-color: #333;
     color: #ddd;
@@ -90,10 +89,6 @@ body {
 
 #codeTextArea:focus, #languageMenu:focus, #filesDropdown:focus {
     outline: none !important;
-}
-
-#blocklyDiv {
-    display: flex;
 }
 
 #languageMenu {

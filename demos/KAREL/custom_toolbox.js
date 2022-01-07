@@ -8,6 +8,7 @@ var KARELtoolbox = {
         {
             "kind": "category",
             "name": "New",
+            "colour":"290",
             "contents": [
                 {
                     "kind": "block",

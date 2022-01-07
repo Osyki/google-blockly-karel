@@ -1,4 +1,5 @@
 goog.require('Blockly.KAREL');
+goog.require('Blockly.zelos.Renderer');
 
 /**
  * Create a namespace for the application.
@@ -42,8 +43,7 @@ Code.LANGUAGE_NAME = {
     'ro': 'Română',
     'ru': 'Русский',
     'sc': 'Sardu',
-    'sk': 'Slovenčina',
-    //'sq': 'Shqip',
+    'sk': 'Slovenčina', //'sq': 'Shqip',
     'sr': 'Српски',
     'sv': 'Svenska',
     'ta': 'தமிழ்',
@@ -151,8 +151,7 @@ Code.changeLanguage = function() {
     }
 
     var languageMenu = document.getElementById('languageMenu');
-    var newLang = encodeURIComponent(
-        languageMenu.options[languageMenu.selectedIndex].value);
+    var newLang = encodeURIComponent(languageMenu.options[languageMenu.selectedIndex].value);
     var search = window.location.search;
     if (search.length <= 1) {
         search = '?lang=' + newLang;
@@ -162,8 +161,7 @@ Code.changeLanguage = function() {
         search = search.replace(/\?/, '?lang=' + newLang + '&');
     }
 
-    window.location = window.location.protocol + '//' +
-        window.location.host + window.location.pathname + search;
+    window.location = window.location.protocol + '//' + window.location.host + window.location.pathname + search;
 };
 
 /**
@@ -223,10 +221,7 @@ Code.getBBox_ = function(element) {
         element = element.offsetParent;
     } while (element);
     return {
-        height: height,
-        width: width,
-        x: x,
-        y: y
+        height: height, width: width, x: x, y: y
     };
 };
 
@@ -257,8 +252,7 @@ Code.tabClick = function(clickedName) {
         try {
             xmlDom = Blockly.Xml.textToDom(xmlText);
         } catch (e) {
-            var q = window.confirm(
-                MSG['parseError'].replace(/%1/g, 'XML').replace('%2', e));
+            var q = window.confirm(MSG['parseError'].replace(/%1/g, 'XML').replace('%2', e));
             if (!q) {
                 // Leave the user on the XML tab.
                 return;
@@ -277,8 +271,7 @@ Code.tabClick = function(clickedName) {
         try {
             json = JSON.parse(jsonText);
         } catch (e) {
-            var q = window.confirm(
-                MSG['parseError'].replace(/%1/g, 'JSON').replace('%2', e));
+            var q = window.confirm(MSG['parseError'].replace(/%1/g, 'JSON').replace('%2', e));
             if (!q) {
                 // Leave the user on the JSON tab.
                 return;
@@ -307,8 +300,7 @@ Code.tabClick = function(clickedName) {
     selectedTab.classList.remove('taboff');
     selectedTab.classList.add('tabon');
     // Show the selected pane.
-    document.getElementById('content_' + clickedName).style.visibility =
-        'visible';
+    document.getElementById('content_' + clickedName).style.visibility = 'visible';
     Code.renderContent();
     // The code menu tab is on if the blocks tab is off.
     var codeMenuTab = document.getElementById('tab_code');
@@ -343,8 +335,7 @@ Code.renderContent = function() {
         xmlTextarea.focus();
     } else if (content.id === 'content_json') {
         var jsonTextarea = document.getElementById('content_json');
-        jsonTextarea.value = JSON.stringify(
-            Blockly.serialization.workspaces.save(Code.workspace), null, 2);
+        jsonTextarea.value = JSON.stringify(Blockly.serialization.workspaces.save(Code.workspace), null, 2);
         jsonTextarea.focus();
     } else if (content.id === 'content_javascript') {
         Code.attemptCodeGeneration(Blockly.JavaScript);
@@ -374,8 +365,6 @@ Code.attemptCodeGeneration = function(generator) {
     if (Code.checkAllGeneratorFunctionsDefined(generator)) {
         var code = Blockly.KAREL.workspaceToCode(Code.workspace);
         content.textContent = code;
-        // Remove the 'prettyprinted' class, so that Prettify will recalculate.
-        // content.className = content.className.replace('prettyprinted', '');
     }
 };
 
@@ -397,8 +386,7 @@ Code.checkAllGeneratorFunctionsDefined = function(generator) {
 
     var valid = missingBlockGenerators.length === 0;
     if (!valid) {
-        var msg = 'The generator code for the following blocks not specified for ' +
-            generator.name_ + ':\n - ' + missingBlockGenerators.join('\n - ');
+        var msg = 'The generator code for the following blocks not specified for ' + generator.name_ + ':\n - ' + missingBlockGenerators.join('\n - ');
         Blockly.dialog.alert(msg);  // Assuming synchronous. No callback.
     }
     return valid;
@@ -422,20 +410,35 @@ Code.init = function() {
         oneBasedIndex: true,
         readOnly: false,
         move: {
-            scrollbars: true,
-            drag: true,
-            wheel: false,
+            scrollbars: true, drag: true, wheel: false,
         },
         toolboxPosition: 'start',
-        zoom:
-            {
-                controls: true,
-                wheel: true,
-                startScale: 1.0,
-                maxScale: 4,
-                minScale: 0.25,
-                scaleSpeed: 1.1
+        zoom: {
+            controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 4,
+            minScale: 0.25,
+            scaleSpeed: 1.1
+        },
+        renderer: 'zelos',
+        theme: {
+            'fontStyle': {
+                "family": "Open Sans, serif", "weight": "normal", "size": 11,
+            }, 'componentStyles': {
+                'workspaceBackgroundColour': "#1e1e1e",
+                'toolboxBackgroundColour': "#333",
+                'toolboxForegroundColour': "#fff",
+                'flyoutBackgroundColour': "#252526",
+                'flyoutForegroundColour': "#ccc",
+                'flyoutOpacity': 1,
+                'scrollbarColour': "#797979",
+                'insertionMarkerColour': "#fff",
+                'insertionMarkerOpacity': .3,
+                'scrollbarOpacity': .4,
+                'cursorColour': "#d0d0d0",
             }
+        }
     };
 
     Code.workspace = Blockly.inject('content_area', Code.toolboxoptions);
@@ -443,17 +446,14 @@ Code.init = function() {
         Blockly.svgResize(Code.workspace);
     };
     window.addEventListener('resize', onresize, false);
-    // onresize();
-    //Blockly.svgResize(Code.workspace);
 
     Code.workspace.addChangeListener(showCode);
 
 };
 
 function showCode() {
-    var content = document.getElementById('codeTextArea');
-    var code = Blockly.KAREL.workspaceToCode(Code.workspace);
-    content.textContent = code;
+    const content = document.getElementById('codeTextArea');
+    content.textContent = Blockly.KAREL.workspaceToCode(Code.workspace);
 }
 
 window.addEventListener('load', Code.init);
