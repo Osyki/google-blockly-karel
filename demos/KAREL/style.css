@@ -37,9 +37,6 @@ body {
 }
 
 #tabrow {
-    border-bottom-style: solid;
-    border-bottom-width: thin;
-    border-bottom-color: #ddd;
     display: flex;
     flex: 0 1 auto;
     flex-wrap: nowrap;
@@ -86,8 +83,8 @@ body {
     margin: 0;
     border: none;
     font-family: 'Open Sans', sans-serif;
-    background-color: #ddd;
-    color: #222;
+    background-color: #333;
+    color: #ddd;
     font-size: medium;
 }
 
