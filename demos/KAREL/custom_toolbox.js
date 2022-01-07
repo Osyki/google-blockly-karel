@@ -17,28 +17,27 @@ var KARELtoolbox = {
         },
         {
             "kind": "category",
-            "name": "Variables",
-            "custom": "VARIABLE"
+            "name": "Test Blocks",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "karel_type",
+                },
+                {
+                    "kind": "block",
+                    "type": "STRUCTURE",
+                },
+            ],
         },
         {
             "kind": "category",
-            "name": "Simple Variables",
+            "name": "Variables",
             "contents": [
                 {
                     "kind": "block",
                     "type": "simple_var",
                 },
-                {
-                    "kind": "block",
-                    "type": "variables_set",
-                },
-                {
-                    "kind": "block",
-                    "type": "variables_get",
-                },
             ],
         },
     ],
 };
-
-

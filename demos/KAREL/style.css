@@ -1,114 +1,176 @@
 /*td, table, div {*/
 /*    border: 1px solid black;*/
 /*}*/
-html, body {
-    height: 100%;
-    margin: 0;
-}
+
+html,
 body {
-    background-color: #ddd;
-    font-family: sans-serif;
-    overflow: hidden;
+    height: 100%;
+    background: #222;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
 }
 
-/*ids*/
+#main {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+#titleversion {
+    display: flex;
+    align-items: baseline;
+}
+
 #title {
-    color: black;
-    font-weight: normal;
-    font-size: 140%;
+    margin-right: 5px;
+    font-size: xx-large;
+    margin-left: 5px;
 }
-#tabletabs {
-    width: 100%;
-}
-#mainTable {
-    margin-top: 10px;
-    height: 100%;
-    width: 100%;
-}
-#blocklyDiv {
-    position: absolute;
-}
-#blocklyrow {
-    height: 100%;
-}
-#codeTextArea {
-    height: 97%;
-    width: 99%;
-    resize: none;
-}
-#languageMenuCell {
-    display: flex;
-    justify-content: right;
-}
-#fileDropDownButton{
 
-}
-#tabrow {
-}
-#tabfile {
-    border-bottom-color: #ddd !important;
-    background-color: #43a252;
-    /*border-top-left-radius: 10px;*/
-    /*border-top-right-radius: 10px;*/
-}
-#headerandoptions {
+#headerrow {
+    color: #fff;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    padding-left: 5px;
-    align-content: flex-end;
-}
-#titleRow {
-}
-#header {
-    display: flex;
-    flex-wrap: nowrap;
-}
-#version {
-    display: flex;
-    align-content: center;
-}
-#options {
-    display: flex;
-    flex-wrap: nowrap;
+    flex: 0 1 auto;
 
 }
-#codeCell {
-    /*height: 50%;*/
-    height: 100%
+
+#tabrow {
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #ddd;
+    display: flex;
+    flex: 0 1 auto;
+    flex-wrap: nowrap;
 }
 
-/*Classes*/
-.headerColumn {
-    padding-left: 3px;
-    padding-right: 3px;
+#contentrow {
+    flex: 1 1 auto;
+    display: flex;
+
 }
-.leftColumn {
-    width: 60%;
+
+#options, #languageMenuCell {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    /*border-top-style: solid;*/
+    /*border-top-width: thin;*/
+    /*border-top-color: #ddd;*/
 }
-.rightColumn {
-    width: 40%;
+
+#filesDropdown {
+    color: #222;
+    border-style: none;
+    font-size: medium;
+    /*margin-right: 4px;*/
+    padding: 5px 5px 0 5px;
+    background-color: #ddd;
+    border-radius: 0;
 }
-.menuButton {
-    margin: 3px;
+
+#content_area {
+    flex: 4 1 auto;
 }
-.tabon {
-    text-align: center;
-    width: 10%;
+
+#textarea {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+#codeTextArea {
+    flex: 1 1 auto;
+    resize: none;
+    margin: 0;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #ddd;
+    color: #222;
+    font-size: medium;
+}
+
+#codeTextArea:focus, #languageMenu:focus, #filesDropdown:focus {
+    outline: none !important;
+}
+
+#blocklyDiv {
+    display: flex;
+}
+
+#languageMenu {
+    border-style: none;
+    background: #222;
     color: white;
-    border-bottom-color: black !important;
+}
+
+#filestab {
+    display: flex;
+    flex-wrap: nowrap;
+
+}
+
+#changefilebutton {
+    padding: 0 5px 0 5px;
+    margin: 0 20px 0 0;
     background-color: #3366cc;
-    /*border-top-left-radius: 10px;*/
-    /*border-top-right-radius: 10px;*/
-}
-.taboff {
-    width: 80%;
-    border-bottom-color: #ddd !important;
-    background-color: #bbb;
-    /*border-top-left-radius: 10px;*/
-    /*border-top-right-radius: 10px;*/
-}
-.taboff:hover {
-    background-color: #eee;
 }
 
+#changefilebutton:hover {
+    background-color: #6598fe;
+}
 
+#file {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    background: #3366cc;
+    border-style: none;
+    font-size: medium;
+    padding: 5px 5px 0 5px;
+}
+
+.menuButton {
+    font-family: 'Open Sans', sans-serif;
+    margin-right: 1px;
+    color: #fff;
+    background: transparent;
+    border-style: none;
+    font-size: medium;
+    padding: 0 10px 0 10px;
+}
+
+.tabbuttonon {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    background: #1b7a2a;
+    border-style: none;
+    font-size: medium;
+    padding: 5px 10px 0 10px;
+}
+
+.menuButton:hover {
+    background: #ddd;
+    color: #222;
+}
+
+.tabbuttonoff {
+    font-family: 'Open Sans', sans-serif;
+    background: #ddd;
+    color: #222;
+    border-style: none;
+    font-size: medium;
+    margin-left: 4px;
+    padding: 5px 10px 0 10px;
+}
+
+.tabbuttonoff:hover, .menuButton:hover {
+    background: #666;
+    color: white;
+}
+
+#filesDropdown:hover, #languageMenu:hover {
+    outline: none;
+    background: #666;
+    color: white;
+}

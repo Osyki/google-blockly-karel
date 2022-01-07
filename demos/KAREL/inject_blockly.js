@@ -412,7 +412,7 @@ Code.init = function() {
 
     //default toolbox
     Code.toolboxoptions = {
-        toolbox: toolbox,
+        toolbox: KARELtoolbox,
         comments: true,
         collapse: true,
         disable: true,
@@ -438,29 +438,13 @@ Code.init = function() {
             }
     };
 
-    var blocklyArea = document.getElementById('content_area');
-    var blocklyDiv = document.getElementById('blocklyDiv');
-    Code.workspace = Blockly.inject('blocklyDiv', Code.toolboxoptions);
+    Code.workspace = Blockly.inject('content_area', Code.toolboxoptions);
     var onresize = function(e) {
-        // Compute the absolute coordinates and dimensions of blocklyArea.
-        var element = blocklyArea;
-        var x = 3;
-        var y = -18;
-        do {
-            x += element.offsetLeft;
-            y += element.offsetTop;
-            element = element.offsetParent;
-        } while (element);
-        // Position blocklyDiv over blocklyArea.
-        blocklyDiv.style.left = x + 'px';
-        blocklyDiv.style.top = y + 'px';
-        blocklyDiv.style.width = blocklyArea.offsetWidth - 6 + 'px';
-        blocklyDiv.style.height = blocklyArea.offsetHeight + 8 + 'px';
         Blockly.svgResize(Code.workspace);
     };
     window.addEventListener('resize', onresize, false);
-    onresize();
-    Blockly.svgResize(Code.workspace);
+    // onresize();
+    //Blockly.svgResize(Code.workspace);
 
     Code.workspace.addChangeListener(showCode);
 
