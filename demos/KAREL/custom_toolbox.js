@@ -7,7 +7,7 @@ var KARELtoolbox = {
     "contents": [
         {
             "kind": "category",
-            "name": "New",
+            "name": "New Program",
             "colour": "260",
             "contents": [
                 {
@@ -18,16 +18,14 @@ var KARELtoolbox = {
         },
         {
             "kind": "category",
-            "name": "Test Blocks",
+            "name": "Comments",
             "contents": [
-                {
-                    "kind": "block",
-                    "type": "karel_type",
-                },
-                {
-                    "kind": "block",
-                    "type": "STRUCTURE",
-                },
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Directives",
+            "contents": [
             ],
         },
         {
@@ -37,6 +35,26 @@ var KARELtoolbox = {
                 {
                     "kind": "block",
                     "type": "simple_var",
+                },
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Routine",
+            "contents": [
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Structures",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "karel_type",
+                },
+                {
+                    "kind": "block",
+                    "type": "STRUCTURE",
                 },
             ],
         },
