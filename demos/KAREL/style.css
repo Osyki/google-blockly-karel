@@ -105,6 +105,7 @@ body {
 }
 
 #fileNameSubmit:hover {
+    cursor: pointer;
     background-color: #5b8ef4;
 }
 
@@ -148,7 +149,6 @@ body {
     color: white;
     display: none;
     position: absolute;
-    /*min-width: 150px;*/
     padding: 5px;
     border-style: solid;
     border-width: thin;
@@ -167,8 +167,6 @@ body {
 }
 
 .dropdownoption:hover {
-    /*background-color: #666;*/
-    /*color: #222;*/
     cursor: default;
 }
 
