@@ -31,6 +31,7 @@
 <body>
 
 <div id="main">
+<!--    Customize header row here    -->
     <div id="headerrow">
         <div class="headerdivs" id="titleversion">
             <div id="title">
@@ -41,7 +42,7 @@
             </div>
         </div>
         <div class="headerdivs" id="options">
-            <button class="menuButton" onclick="showFilePopUp('newFilePopUp')" title="New File">New File
+            <button class="menuButton" onclick="newWorkspaceXML()" title="New File">New File
             </button>
             <button class="menuButton" onclick="showFilePopUp('saveFilePopUp')" title="Save your work.">Save
                 Files
@@ -59,8 +60,8 @@
             </button>
             <button class="menuButton" onclick="downloadCode()">Download Code</button>
         </div>
-
     </div>
+    <!--    Customize tab row here    -->
     <div id="tabrow">
         <div id="filestab">
             <div id="file">File:</div>
@@ -70,11 +71,10 @@
             </select>
             <button class="tabbuttonon" id="changefilebutton">&rarr;</button>
         </div>
-
         <button class="tabbuttonon">KAREL</button>
         <button class="tabbuttonoff">C++</button>
-
     </div>
+    <!--    Customize content row here    -->
     <div id="contentrow">
         <div id="content_area">
         </div>
@@ -82,8 +82,17 @@
             <label for="codeTextArea"></label><textarea id="codeTextArea" readonly spellcheck="false" wrap="off">Code prints here</textarea>
         </div>
     </div>
-
 </div>
+
+<!--<div id="overlay">-->
+<div class="modal" id="modal">
+    <div class="fileName">Enter file name:</div>
+    <div class="fileName" contenteditable="true" id="fileNametextarea" spellcheck="false">prog_name.kl</div>
+    <button class="fileName" id="fileNameSubmit">&rarr;</button>
+    <button class="fileName" id="fileNameCancel">&times;</button>
+</div>
+<!--</div>-->
+
 
 </body>
 

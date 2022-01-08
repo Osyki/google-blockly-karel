@@ -66,7 +66,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@blockly/block-test": "^1.0.0",
-    "@blockly/dev-tools": "^3.0.1",
+    "@blockly/dev-tools": "^0.20200313.1",
     "@blockly/theme-modern": "^2.1.1",
     "@wdio/selenium-standalone-service": "^7.10.1",
     "babel-eslint": "^10.1.0",
@@ -79,14 +79,14 @@
     "google-closure-compiler": "^20211107.0.0",
     "google-closure-deps": "^20211107.0.0",
     "gulp": "^4.0.2",
-    "gulp-clang-format": "^1.0.27",
+    "gulp-clang-format": "^1.0.21",
     "gulp-concat": "^2.6.1",
     "gulp-insert": "^0.5.0",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
     "gulp-series": "^1.0.2",
     "gulp-shell": "^0.8.0",
-    "gulp-sourcemaps": "^3.0.0",
+    "gulp-sourcemaps": "^2.6.5",
     "gulp-umd": "^2.0.0",
     "http-server": "^14.0.0",
     "js-green-licenses": "^3.0.0",
@@ -102,6 +102,7 @@
   "dependencies": {
     "@blockly/theme-dark": "^2.0.7",
     "jsdom": "15.2.1",
-    "node-popup": "^0.1.14"
+    "node-popup": "^0.1.14",
+    "popups": "^1.1.3"
   }
 }

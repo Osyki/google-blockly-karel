@@ -83,11 +83,16 @@ function generateCode() {
 }
 
 /**
+ * FIXME: New workspace
+ */
+function newWorkspaceXML() {
+}
+
+/**
  * FIXME: Save workspace
  */
-Code.saveWorkspaceXML = function() {
-
-};
+function saveWorkspaceXML() {
+}
 
 /**
  * FIXME: Load workspace
