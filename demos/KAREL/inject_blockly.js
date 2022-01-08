@@ -37,7 +37,7 @@ Code.toolboxoptions = {
     zoom: {
         controls: true,
         wheel: true,
-        startScale: 1.0,
+        startScale: 0.90,
         maxScale: 4,
         minScale: 0.25,
         scaleSpeed: 1.1
