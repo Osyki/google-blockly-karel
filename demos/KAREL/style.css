@@ -2,6 +2,10 @@
 /*    border: 1px solid red;*/
 /*}*/
 
+a {
+    color: #43c9fa;
+}
+
 html,
 body {
     height: 100%;
@@ -55,15 +59,6 @@ body {
     align-items: flex-start;
 }
 
-#filesDropdown {
-    color: #222;
-    border-style: none;
-    font-size: medium;
-    padding: 5px 5px 0 5px;
-    background-color: #fff;
-    border-radius: 0;
-}
-
 #content_area {
     flex: 4 1 auto;
 }
@@ -87,7 +82,7 @@ body {
     font-size: medium;
 }
 
-#codeTextArea:focus, #languageMenu:focus, #filesDropdown:focus, #fileNametextarea:focus {
+#codeTextArea:focus, #languageMenu:focus, #fileNametextarea:focus {
     outline: none !important;
 }
 
@@ -99,84 +94,121 @@ body {
 
 #filestab {
     display: flex;
-    flex-wrap: nowrap;
-
 }
 
-#fileNameCancel {
-    padding: 2px 10px 0 10px;
-    font-size: large;
-    margin: 0 0 0 2px;
-    background-color: crimson;
-}
 
 #fileNameSubmit {
-    padding: 0 5px 2px 5px;
+    /*padding: 0 5px 2px 5px;*/
+    margin: 0;
     font-size: large;
-    margin: 0 0 0 2px;
     background-color: #3366cc;
 }
 
-#changefilebutton {
-    padding: 0 5px 0 5px;
-    margin: 0 20px 0 0;
-    background-color: #3366cc;
-}
-
-#changefilebutton:hover, #fileNameSubmit:hover {
-    background-color: #6598fe;
-}
-
-#fileNameCancel:hover {
-    background-color: #ff375f;
+#fileNameSubmit:hover {
+    background-color: #5b8ef4;
 }
 
 #file {
+    display: flex;
     font-family: 'Open Sans', sans-serif;
     color: white;
     background: #3366cc;
     border-style: none;
     font-size: medium;
-    padding: 5px 5px 0 5px;
+    align-items: center;
+    padding: 0 5px 0 5px;
 }
 
-#filesDropdown:hover, #languageMenu:hover {
+#file:hover {
+    cursor: default;
+}
+
+#languageMenu:hover {
     outline: none;
     background: #666;
     color: white;
 }
 
-.modal {
-    display: flex;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 20;
+.dropdownoption {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    /*display: flex;*/
+    /*flex-wrap: nowrap;*/
+}
+
+.dropdown, .filedropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownmodal {
+    /*blockly z-index is 70*/
+    z-index: 100;
     background-color: #444;
+    color: white;
+    display: none;
+    position: absolute;
+    /*min-width: 150px;*/
     padding: 5px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #aaa;
+}
+
+.filedropdown:hover .dropdownmodal {
+    white-space: nowrap;
+    display: flex;
+    flex-flow: column;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdownmodal {
+    display: flex;
+}
+
+.dropdownoption:hover {
+    /*background-color: #666;*/
+    /*color: #222;*/
+    cursor: default;
 }
 
 .fileName {
-    /*display: flex;*/
-    padding-left: 5px;
-    padding-right: 5px;
+    display: flex;
+    align-items: center;
     color: white;
     font-size: medium;
     border: none;
-    margin: 0;
+    margin-right: 5px;
 }
 
 #fileNametextarea {
-    display: flex;
     align-items: center;
-    max-width: 100%;
     font-family: 'Open Sans', sans-serif;
     background-color: #fff;
     color: #333;
     font-size: medium;
-    width: 200px;
+    width: 150px;
     line-height: 1;
     overflow: hidden;
+    padding-left: 4px;
+    margin: 0;
+}
+
+#fixfiledropdown {
+    background-color: white;
+    display: flex;
+    align-items: flex-end;
+    margin-right: 10px;
+}
+
+.fileDropdownButton {
+    font-family: 'Open Sans', sans-serif;
+    margin-right: 1px;
+    color: #222;
+    background: transparent;
+    border-style: none;
+    font-size: medium;
+    padding: 0 10px 0 10px;
 }
 
 .menuButton {
@@ -189,13 +221,43 @@ body {
     padding: 0 10px 0 10px;
 }
 
-.tabbuttonon {
+.menuButton {
+    font-family: 'Open Sans', sans-serif;
+    margin-right: 1px;
+    color: #fff;
+    background: transparent;
+    border-style: none;
+    font-size: medium;
+    padding: 0 10px 0 10px;
+}
+
+.tabdivon {
+    margin-left: 5px;
+    display: flex;
     font-family: 'Open Sans', sans-serif;
     color: white;
     background: #1b7a2a;
     border-style: none;
     font-size: medium;
-    padding: 5px 10px 0 10px;
+    /*padding: 5px 5px 0 5px;*/
+}
+
+.tabdivoff {
+    margin-left: 5px;
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    background: #ddd;
+    color: #222;
+    border-style: none;
+    font-size: medium;
+}
+
+.tabbuttonon {
+    background-color: transparent;
+    border-style: none;
+    color: white;
+    font-size: medium;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .menuButton:hover {
@@ -204,16 +266,15 @@ body {
 }
 
 .tabbuttonoff {
-    font-family: 'Open Sans', sans-serif;
-    background: #ddd;
-    color: #222;
+    background-color: transparent;
     border-style: none;
+    color: #222;
     font-size: medium;
-    margin-left: 4px;
-    padding: 5px 10px 0 10px;
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
 }
 
-.tabbuttonoff:hover, .menuButton:hover {
+.tabbuttonoff:hover, .menuButton:hover, .tabdivoff:hover {
     background: #666;
     color: white;
 }

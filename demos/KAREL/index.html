@@ -35,44 +35,57 @@
     <div id="headerrow">
         <div class="headerdivs" id="titleversion">
             <div id="title">
-                KAREL
+                Blockly4KAREL
             </div>
             <div>
                 <span id="version">v0.1</span>
             </div>
         </div>
         <div class="headerdivs" id="options">
-            <button class="menuButton" onclick="newWorkspaceXML()" title="New File">New File
+
+
+            <button class="menuButton" onclick="" title="Save workspace">Save
             </button>
-            <button class="menuButton" onclick="showFilePopUp('saveFilePopUp')" title="Save your work.">Save
-                Files
+            <button class="menuButton" onclick="" title="Load workspace">Load
             </button>
-            <button class="menuButton" onclick="showFilePopUp('loadFilePopUp')" title="Load your work.">Load
-                Files
-            </button>
-            <input id="fileSaveBtn" multiple onchange="readFiles(this)" style="display:none"
-                   title="Load a blockly save into the program." type="file"/>
-            <button class="menuButton" onclick="showFilePopUp('renameFilePopUp')" title="Rename File">Rename
+            <div class="dropdown">
+                <button class="menuButton" onclick="newWorkspaceXML()" title="Add new file to workspace">New File
+                </button>
+                <div class="dropdownmodal" id="newfilemodal">
+                    <div class="fileName">Filename:</div>
+                    <div class="fileName" contenteditable="true" id="fileNametextarea" spellcheck="false">prog_name.kl
+                    </div>
+                    <button class="fileName" id="fileNameSubmit" title="Create new file">&rarr;</button>
+                </div>
+            </div>
+            <button class="menuButton" onclick="" title="Rename currently opened file">Rename
                 File
             </button>
-            <button class="menuButton" onclick="showFilePopUp('deleteFilePopUp')" title="Delete File">Delete
+            <button class="menuButton" onclick="" title="Delete currently opened file">Delete
                 File
             </button>
-            <button class="menuButton" onclick="downloadCode()">Download Code</button>
+            <button class="menuButton" onclick="">Download Code</button>
         </div>
     </div>
     <!--    Customize tab row here    -->
     <div id="tabrow">
-        <div id="filestab">
-            <div id="file">File:</div>
-            <label for="filesDropdown"></label>
-            <select id="filesDropdown">
-                <option>prog_name.kl</option>
-            </select>
-            <button class="tabbuttonon" id="changefilebutton">&rarr;</button>
+        <div id="file">File:</div>
+        <div id="fixfiledropdown">
+            <div class="filedropdown">
+                <button class="fileDropdownButton" title="Click on a file to load">prog_name.kl</button>
+                <div class="dropdownmodal" id="showfilesmodal">
+                    <div class="dropdownoption">Use 'New File' button to add files</div>
+                    <!--                    <div class="dropdownoption"><a href="">Some text to test</a></div>-->
+                </div>
+            </div>
         </div>
-        <button class="tabbuttonon">KAREL</button>
-        <button class="tabbuttonoff">C++</button>
+
+        <div class="tabdivon">
+            <button class="tabbuttonon" title="Blockly4KAREL">KAREL</button>
+        </div>
+        <div class="tabdivoff">
+            <button class="tabbuttonoff" title="Blockly4C++">C++</button>
+        </div>
     </div>
     <!--    Customize content row here    -->
     <div id="contentrow">
@@ -85,12 +98,7 @@
 </div>
 
 <!--<div id="overlay">-->
-<div class="modal" id="modal">
-    <div class="fileName">Enter file name:</div>
-    <div class="fileName" contenteditable="true" id="fileNametextarea" spellcheck="false">prog_name.kl</div>
-    <button class="fileName" id="fileNameSubmit">&rarr;</button>
-    <button class="fileName" id="fileNameCancel">&times;</button>
-</div>
+
 <!--</div>-->
 
 
