@@ -250,11 +250,16 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+#newFileButton:hover {
+    cursor: default;
+}
+
 .menuButton:hover {
     background: #ddd;
     color: #222;
     cursor: pointer;
 }
+
 
 .tabbuttonoff {
     background-color: transparent;
