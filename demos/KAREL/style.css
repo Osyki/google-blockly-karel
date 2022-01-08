@@ -221,16 +221,6 @@ body {
     padding: 0 10px 0 10px;
 }
 
-.menuButton {
-    font-family: 'Open Sans', sans-serif;
-    margin-right: 1px;
-    color: #fff;
-    background: transparent;
-    border-style: none;
-    font-size: medium;
-    padding: 0 10px 0 10px;
-}
-
 .tabdivon {
     margin-left: 5px;
     display: flex;
@@ -263,6 +253,7 @@ body {
 .menuButton:hover {
     background: #ddd;
     color: #222;
+    cursor: pointer;
 }
 
 .tabbuttonoff {

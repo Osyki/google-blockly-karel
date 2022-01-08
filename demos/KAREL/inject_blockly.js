@@ -1,6 +1,9 @@
 //for theming purposes
 goog.require('Blockly.zelos.Renderer');
 
+//for toolbox
+goog.require('KARELtoolbox');
+
 //include all generators here
 goog.require('Blockly.KAREL');
 
