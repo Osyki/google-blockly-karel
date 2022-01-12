@@ -7,7 +7,7 @@ var KARELtoolbox = {
     "contents": [
         {
             "kind": "category",
-            "name": "New",
+            "name": "New Program",
             "colour": "260",
             "contents": [
                 {
@@ -18,16 +18,14 @@ var KARELtoolbox = {
         },
         {
             "kind": "category",
-            "name": "Test Blocks",
+            "name": "Comments",
             "contents": [
-                {
-                    "kind": "block",
-                    "type": "karel_type",
-                },
-                {
-                    "kind": "block",
-                    "type": "STRUCTURE",
-                },
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Directives",
+            "contents": [
             ],
         },
         {
@@ -37,6 +35,106 @@ var KARELtoolbox = {
                 {
                     "kind": "block",
                     "type": "simple_var",
+                },
+                {
+                    "kind": "block",
+                    "type": "variables_get",
+                },
+                {
+                    "kind": "block",
+                    "type": "variables_set",
+                },
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Routine",
+            "contents": [
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Select",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "karel_case",
+                },
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Math",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "math_number",
+                },
+                // {
+                //     "kind": "block",
+                //     "type": "math_arithmetic",
+                // },
+                // {
+                //     "kind": "block",
+                //     "type": "math_single",
+                // },
+                // {
+                //     "kind": "block",
+                //     "type": "math_trig",
+                // },
+                {
+                    "kind": "block",
+                    "type": "math_constant",
+                },
+                // {
+                //     "kind": "block",
+                //     "type": "math_number_property",
+                // },
+                // {
+                //     "kind": "block",
+                //     "type": "math_change",
+                // },
+                {
+                    "kind": "block",
+                    "type": "math_round",
+                },
+                // {
+                //     "kind": "block",
+                //     "type": "math_on_list",
+                // },
+                {
+                    "kind": "block",
+                    "type": "math_modulo",
+                },
+                {
+                    "kind": "block",
+                    "type": "math_constrain",
+                },
+                {
+                    "kind": "block",
+                    "type": "math_random_int",
+                },
+                {
+                    "kind": "block",
+                    "type": "math_random_float",
+                },
+                {
+                    "kind": "block",
+                    "type": "math_atan2",
+                },
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "Structures",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "karel_type",
+                },
+                {
+                    "kind": "block",
+                    "type": "STRUCTURE",
                 },
             ],
         },

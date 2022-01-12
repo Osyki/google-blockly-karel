@@ -58,12 +58,15 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     },
     {
         "type": "STRUCTURE",
-        "message0": "%1 = STRUCTURE %2",
+        "message0": "%1 = STRUCTURE %2 %3",
         "args0": [
             {
                 "type": "field_variable",
                 "name": "NAME",
-                "variable": "Name"
+                "variable": "VAR"
+            },
+            {
+                "type": "input_dummy"
             },
             {
                 "type": "input_statement",
@@ -75,6 +78,6 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "nextStatement": null,
         "colour": 230,
         "tooltip": "",
-        "helpUrl": "",
+        "helpUrl": ""
     }
 ]);  // END JSON EXTRACT (Do not delete this comment.)

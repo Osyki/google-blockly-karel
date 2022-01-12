@@ -28,16 +28,13 @@ goog.require('Blockly.KAREL');
 
 Blockly.KAREL['variables_get'] = function(block) {
   // Variable getter.
-  var code = Blockly.KAREL.variableDB_.getName(block.getFieldValue('VAR'),
-    Blockly.VARIABLE_CATEGORY_NAME);
+  const code = Blockly.KAREL.variableDB_.getName(block.getFieldValue('VAR'), Blockly.VARIABLE_CATEGORY_NAME);
   return [code, Blockly.KAREL.ORDER_ATOMIC];
 };
 
 Blockly.KAREL['variables_set'] = function(block) {
   // Variable setter.
-  var argument0 = Blockly.KAREL.valueToCode(block, 'VALUE',
-    Blockly.KAREL.ORDER_ASSIGNMENT) || '0';
-  var varName = Blockly.KAREL.variableDB_.getName(
-    block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-  return varName + ' : ' + argument0 + '\n';
+  const argument0 = Blockly.KAREL.valueToCode(block, 'VALUE', Blockly.KAREL.ORDER_NONE) || '0';
+  const varName = Blockly.KAREL.variableDB_.getName(block.getFieldValue('VAR'),  Blockly.VARIABLE_CATEGORY_NAME);
+  return varName + ' = ' + argument0 + '\n';
 };
