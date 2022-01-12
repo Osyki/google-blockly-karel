@@ -29,8 +29,9 @@
  */
 'use strict';
 
-goog.provide('Blockly.blocks.select');
+goog.provide('Blockly.Constants.select');
 goog.require('Blockly.Blocks');
+goog.require('Blockly');
 
 /**
  * Unused constant for the common HSV hue for all blocks in this category.

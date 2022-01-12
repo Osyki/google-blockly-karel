@@ -33,7 +33,7 @@ goog.provide('Blockly.Constants.Simplevariables');
 
 goog.require('Blockly.Blocks');
 goog.require('Blockly');
-
+goog.require('Blockly.Extensions');
 
 /**
  * Unused constant for the common HSV hue for all blocks in this category.
@@ -43,45 +43,67 @@ goog.require('Blockly');
 Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     // Block for set simple data type
     {
-        "type": "simple_var",
-        "message0": "%1 : %2",
-        "args0": [
+        'type': 'simple_var',
+        'message0': '%1 : %2',
+        'args0': [
             {
-                "type": "field_variable",
-                "name": "var_name",
-                "variable": "item",
+                'type': 'field_variable',
+                'name': 'var_name',
+                'variable': 'var_name',
             },
             {
-                "type": "field_dropdown",
-                "name": "var_type",
-                "options": [
+                'type': 'field_dropdown',
+                'name': 'var_type',
+                'options': [
                     [
-                        "BOOLEAN",
-                        "BOOLEAN",
+                        'BOOLEAN',
+                        'BOOLEAN',
                     ],
                     [
-                        "FILE",
-                        "FILE",
+                        'FILE',
+                        'FILE',
                     ],
                     [
-                        "INTEGER",
-                        "INTEGER",
+                        'INTEGER',
+                        'INTEGER',
                     ],
                     [
-                        "REAL",
-                        "REAL",
+                        'REAL',
+                        'REAL',
                     ],
                     [
-                        "STRING",
-                        "STRING",
+                        'STRING',
+                        'STRING',
                     ],
                 ],
             },
         ],
-        "previousStatement": null,
-        "nextStatement": null,
-        "colour": 230,
-        "tooltip": "",
-        "helpUrl": "",
-    }
+        'output': 'variable',
+        'previousStatement': null,
+        'nextStatement': null,
+        'colour': 230,
+        'tooltip': '',
+        'helpUrl': '',
+        'extensions': ['test_mixin'],
+    },
 ]);  // END JSON EXTRACT (Do not delete this comment.)
+
+
+Blockly.Extensions.registerMixin("test_mixin", {
+    isFile: [
+        [
+            'true',
+            'true',
+        ],
+        [
+            'false',
+            'false',
+        ],
+    ],
+    showInput: function() {
+        const warningforblock = new Blockly.Warning(this);
+        warningforblock.setText('This is a test block', 'test');
+        warningforblock.setVisible(true);
+        this.setTooltip("this is a test");
+    },
+});

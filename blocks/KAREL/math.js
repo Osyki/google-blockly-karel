@@ -10,9 +10,10 @@
  */
 'use strict';
 
-goog.provide('Blockly.blocks.math');
+goog.provide('Blockly.Constants.Math');
 
-
+goog.require('Blockly.Blocks');
+goog.require('Blockly');
 
 Blockly.defineBlocksWithJsonArray([
     // Block for numeric value.

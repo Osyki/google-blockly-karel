@@ -29,7 +29,8 @@
  */
 'use strict';
 
-goog.provide('Blockly.blocks.TYPE');
+goog.provide('Blockly.Constant.TYPE');
+
 goog.require('Blockly');
 goog.require('Blockly.Blocks');
 
