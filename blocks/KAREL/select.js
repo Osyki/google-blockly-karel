@@ -29,11 +29,8 @@
  */
 'use strict';
 
-goog.provide('Blockly.Constants.Simplevariables');
-
+goog.provide('Blockly.blocks.select');
 goog.require('Blockly.Blocks');
-goog.require('Blockly');
-
 
 /**
  * Unused constant for the common HSV hue for all blocks in this category.
@@ -41,47 +38,26 @@ goog.require('Blockly');
  */
 
 Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
-    // Block for set simple data type
+    // Block for TYPE block, used to hold STRUCTURE
     {
-        "type": "simple_var",
-        "message0": "%1 : %2",
+        "type": "karel_case",
+        "message0": "CASE : %1 %2 RETURN : %3",
         "args0": [
             {
-                "type": "field_variable",
-                "name": "var_name",
-                "variable": "item",
+                "type": "field_input",
+                "name": "CASE",
+                "text": "default"
             },
             {
-                "type": "field_dropdown",
-                "name": "var_type",
-                "options": [
-                    [
-                        "BOOLEAN",
-                        "BOOLEAN",
-                    ],
-                    [
-                        "FILE",
-                        "FILE",
-                    ],
-                    [
-                        "INTEGER",
-                        "INTEGER",
-                    ],
-                    [
-                        "REAL",
-                        "REAL",
-                    ],
-                    [
-                        "STRING",
-                        "STRING",
-                    ],
-                ],
+                "type": "input_dummy"
             },
+            {
+                "type": "input_statement",
+                "name": "NAME"
+            }
         ],
-        "previousStatement": null,
-        "nextStatement": null,
         "colour": 230,
         "tooltip": "",
-        "helpUrl": "",
+        "helpUrl": ""
     }
 ]);  // END JSON EXTRACT (Do not delete this comment.)

@@ -78,12 +78,24 @@ Blockly.KAREL = new Blockly.Generator('KAREL');
  * Order of operation ENUMs.
  * https://www.dartlang.org/docs/dart-up-and-runn
  */
+
+// Blockly.KAREL.ORDER_NOT = 1;               // not operation
+// Blockly.KAREL.ORDER_SPECIAL = 2;           // :, @, #
+// Blockly.KAREL.ORDER_UPPER_ARITHMATIC = 3;  // *, /, AND, DIV, MOD
+// Blockly.KAREL.ORDER_LOWER_ARITHMATIC = 4;  // Unary + and -, OR, +, -
+// Blockly.KAREL.ORDER_RELATIONAL = 5;        // <, >, =, < >, < =, > =, > = <
+
 Blockly.KAREL.ORDER_ATOMIC = 0;              // literals
-Blockly.KAREL.ORDER_NOT = 1;               // not operation
-Blockly.KAREL.ORDER_SPECIAL = 2;           // :, @, #
-Blockly.KAREL.ORDER_UPPER_ARITHMATIC = 3;  // *, /, AND, DIV, MOD
-Blockly.KAREL.ORDER_LOWER_ARITHMATIC = 4;  // Unary + and -, OR, +, -
-Blockly.KAREL.ORDER_RELATIONAL = 5;        // <, >, =, < >, < =, > =, > = <
+// The next level was not explicit in documentation and inferred by Keith.
+Blockly.KAREL.ORDER_UNARY = 1;           // not # - ~
+Blockly.KAREL.ORDER_HIGH = 1.1;            // Function calls, tables[]
+Blockly.KAREL.ORDER_EXPONENTIATION = 2;  // ^
+Blockly.KAREL.ORDER_MULTIPLICATIVE = 3;  // * / %
+Blockly.KAREL.ORDER_AND = 3.1;             // and
+Blockly.KAREL.ORDER_ADDITIVE = 4;        // + -
+Blockly.KAREL.ORDER_OR = 4.1;              // or
+Blockly.KAREL.ORDER_RELATIONAL = 5;      // < > <=  >= ~= ==
+Blockly.KAREL.ORDER_CONCATENATION = 6;   // ..
 Blockly.KAREL.ORDER_NONE = 99;
 
 /**
