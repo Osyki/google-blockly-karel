@@ -11,7 +11,7 @@ goog.require('Blockly.KAREL');
 /**
  * Create a namespace for the application.
  */
-var Code = {};
+const Code = {};
 
 /**
  * Blockly's main workspace.
@@ -20,11 +20,28 @@ var Code = {};
 Code.workspace = null;
 
 /**
+ * default option is KAREL FIXME: (change to C++ later)
+ * @type {{contents: [{contents: [{kind: string, type: string}], kind: string, name: string},{kind: string, custom: string, name: string},{contents: [{kind: string, type: string},{kind: string, type: string},{kind: string, type: string}], kind: string, name: string}], kind: string}|{contents, kind: string}|*}
+ */
+Code.toolbox = KARELtoolbox;
+
+/**
+ * Tab names for each generator
+ * @type {string[]}
+ */
+Code.tabs = ['KAREL', 'C++'];
+
+/**
+ * Current tab
+ */
+Code.currentTab = 'KAREL';
+
+/**
  * Default toolbox set to KARELtoolbox currently
  * @type {{toolboxPosition: string, move: {scrollbars: boolean, wheel: boolean, drag: boolean}, renderer: string, comments: boolean, readOnly: boolean, zoom: {startScale: number, controls: boolean, maxScale: number, wheel: boolean, scaleSpeed: number, minScale: number}, media: string, maxBlocks: number, oneBasedIndex: boolean, horizontalLayout: boolean, disable: boolean, toolbox: ({contents: [{contents: [{kind: string, type: string}], kind: string, name: string},{kind: string, custom: string, name: string},{contents: [{kind: string, type: string},{kind: string, type: string},{kind: string, type: string}], kind: string, name: string}], kind: string}|{contents: [{colour: string, contents: [{kind: string, type: string}], kind: string, name: string},{contents: [{kind: string, type: string},{kind: string, type: string}], kind: string, name: string},{contents: [{kind: string, type: string}], kind: string, name: string}], kind: string}|*), theme: {fontStyle: {size: number, weight: string, family: string}, componentStyles: {toolboxForegroundColour: string, cursorColour: string, workspaceBackgroundColour: string, flyoutOpacity: number, scrollbarOpacity: number, flyoutForegroundColour: string, scrollbarColour: string, insertionMarkerOpacity: number, flyoutBackgroundColour: string, insertionMarkerColour: string, toolboxBackgroundColour: string}}, collapse: boolean}}
  */
 Code.toolboxoptions = {
-    toolbox: KARELtoolbox,
+    toolbox: Code.toolbox,
     comments: true,
     collapse: true,
     disable: true,
@@ -79,17 +96,53 @@ Code.init = function() {
 
 /**
  * Real-time generation of code
+ * FIXME: Need C++ generator
  */
 Code.generateCode = function() {
     const content = document.getElementById('codeTextArea');
-    content.textContent = Blockly.KAREL.workspaceToCode(Code.workspace);
+    switch (Code.currentTab) {
+        case 'KAREL':
+            content.textContent = Blockly.KAREL.workspaceToCode(Code.workspace);
+            break;
+
+        case 'C++':
+            content.textContent = Code.currentTab + ' not defined yet!';
+            break;
+
+        default:
+            break;
+    }
+
+}
+
+/**
+ * FIXME: Changes workspace/codegeneration. Need to implement C++
+ */
+function changeWorkspace(buttonName) {
+    let warningText = 'Are you sure you want to switch tabs? ' +
+        'Doing so will reset your current workspace.';
+
+    if (confirm(warningText) === true) {
+        var tabElement = document.getElementById(Code.currentTab);
+        tabElement.className = 'tabbuttonoff';
+        tabElement.parentElement.className = 'tabdivoff';
+
+        Code.currentTab = buttonName;
+        tabElement = document.getElementById(Code.currentTab);
+        tabElement.className = 'tabbuttonon';
+        tabElement.parentElement.className = 'tabdivon';
+
+        Code.workspace.clear();
+        Code.generateCode();
+    }
+
 }
 
 /**
  * FIXME: New workspace
  */
 Code.newWorkspaceXML = function() {
-}
+};
 
 /**
  * FIXME: Save workspace
