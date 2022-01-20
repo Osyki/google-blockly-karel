@@ -20,7 +20,7 @@ var Code = {};
 Code.workspace = null;
 
 /**
- * Default toolbox
+ * Default toolbox set to KARELtoolbox currently
  * @type {{toolboxPosition: string, move: {scrollbars: boolean, wheel: boolean, drag: boolean}, renderer: string, comments: boolean, readOnly: boolean, zoom: {startScale: number, controls: boolean, maxScale: number, wheel: boolean, scaleSpeed: number, minScale: number}, media: string, maxBlocks: number, oneBasedIndex: boolean, horizontalLayout: boolean, disable: boolean, toolbox: ({contents: [{contents: [{kind: string, type: string}], kind: string, name: string},{kind: string, custom: string, name: string},{contents: [{kind: string, type: string},{kind: string, type: string},{kind: string, type: string}], kind: string, name: string}], kind: string}|{contents: [{colour: string, contents: [{kind: string, type: string}], kind: string, name: string},{contents: [{kind: string, type: string},{kind: string, type: string}], kind: string, name: string},{contents: [{kind: string, type: string}], kind: string, name: string}], kind: string}|*), theme: {fontStyle: {size: number, weight: string, family: string}, componentStyles: {toolboxForegroundColour: string, cursorColour: string, workspaceBackgroundColour: string, flyoutOpacity: number, scrollbarOpacity: number, flyoutForegroundColour: string, scrollbarColour: string, insertionMarkerOpacity: number, flyoutBackgroundColour: string, insertionMarkerColour: string, toolboxBackgroundColour: string}}, collapse: boolean}}
  */
 Code.toolboxoptions = {
@@ -73,14 +73,14 @@ Code.init = function() {
     Code.workspace = Blockly.inject('content_area', Code.toolboxoptions);
 
     //adds a change listener to workspace for real-time code generation
-    Code.workspace.addChangeListener(generateCode);
+    Code.workspace.addChangeListener(Code.generateCode);
 };
 
 
 /**
  * Real-time generation of code
  */
-function generateCode() {
+Code.generateCode = function() {
     const content = document.getElementById('codeTextArea');
     content.textContent = Blockly.KAREL.workspaceToCode(Code.workspace);
 }
@@ -88,13 +88,13 @@ function generateCode() {
 /**
  * FIXME: New workspace
  */
-function newWorkspaceXML() {
+Code.newWorkspaceXML = function() {
 }
 
 /**
  * FIXME: Save workspace
  */
-function saveWorkspaceXML() {
+Code.saveWorkspaceXML = function() {
 }
 
 /**
