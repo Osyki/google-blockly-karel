@@ -118,7 +118,7 @@ Code.generateCode = function() {
 /**
  * FIXME: Changes workspace/codegeneration. Need to implement C++
  */
-function changeWorkspace(buttonName) {
+Code.changeWorkspace = function(buttonName) {
     let warningText = 'Are you sure you want to switch tabs? ' +
         'Doing so will reset your current workspace.';
 
