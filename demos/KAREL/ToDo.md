@@ -98,4 +98,38 @@ end copy above line here -->
   </li>
 </ul>
 
+<h2 style="color:CornflowerBlue"></u> Allow loading/saving workspace </u></h3>
+<ul style="font-size: medium; color:crimson">
+  <li> 
+    Save button to ask user where to save XML of block.
+    <ul style="color:Goldenrod">
+      <li> 
+      Reason: 
+        <span style="color: #ddd">
+        User will have local file copy.
+        </span>
+      </li>
+    </ul>
+  </li> 
+  <li> 
+    Load button to ask user where to find file of block XML.
+    <ul style="color:Goldenrod">
+      <li> 
+      Reason: 
+        <span style="color: #ddd">
+        User will be able to load local file copy.
+        </span>
+      </li>
+      <ul style="color:darkorange">
+        <li> 
+        Comment: 
+          <span style="color: #888">
+          Ensure file can be properly read. Load file into current workspace.
+          </span>
+        </li>
+      </ul>
+    </ul>
+  </li> 
+</ul>
+
 </body>
