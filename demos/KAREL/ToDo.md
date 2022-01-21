@@ -132,4 +132,19 @@ end copy above line here -->
   </li> 
 </ul>
 
+<h2 style="color:CornflowerBlue"></u> Implement C++ Blockly </u></h3>
+<ul style="font-size: medium; color:crimson">
+  <li> 
+    Add C++ toolbox.
+    <ul style="color:Goldenrod">
+      <li> 
+      Reason: 
+        <span style="color: #ddd">
+        Users can choose only C++ blocks.
+        </span>
+      </li>
+    </ul>
+  </li>  
+</ul>
+
 </body>
