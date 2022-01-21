@@ -69,6 +69,7 @@ body {
 }
 
 #codeTextArea {
+    white-space: pre;
     flex: 1 1 auto;
     resize: none;
     margin: 0;

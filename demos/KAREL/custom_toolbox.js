@@ -2,7 +2,7 @@ goog.provide('KARELtoolbox');
 
 'use strict';
 
-var KARELtoolbox = {
+const KARELToolbox = {
     "kind": "categoryToolbox",
     "contents": [
         {
@@ -139,4 +139,9 @@ var KARELtoolbox = {
             ],
         },
     ],
+};
+
+const blankToolbox = {
+    "kind": "categoryToolbox",
+    "contents": [],
 };

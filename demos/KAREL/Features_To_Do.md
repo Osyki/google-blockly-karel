@@ -55,7 +55,7 @@ end copy above line here -->
 
 <h2 style="color:CornflowerBlue"></u>Modify listener of workspace</u></h3>
 <ul style="font-size: medium; color:crimson">
-  <li> 
+  <li style="color:darkolivegreen"> 
     Add function to check if blocks are being used correctly.
     <ul style="color:Goldenrod">
       <li> 
@@ -66,7 +66,7 @@ end copy above line here -->
       </li>
     </ul>
   </li> 
-  <li> 
+  <li style="color:darkolivegreen"> 
     Call workspace generator depending on current tab.
     <ul style="color:Goldenrod">
       <li> 
